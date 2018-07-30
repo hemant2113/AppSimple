@@ -1,0 +1,21 @@
+
+<div class="container-fluid nopadd" >
+<div class="leftside">
+  
+  <!-- <div class="logo"> <img src="{{logo}}"> </div> -->
+ 
+  <ul class="nav leftnav" *ngFor="let nurtureurl of nurture_url; let i =index"
+  >
+      <li class="active" ><a href="{{nurtureurl.url}}"  target="myiframe" class="url_link" ng-class="{test: 'i == 0'}">({{i+1}})  {{nurtureurl.name}}</a></li>
+    
+      <li></li>
+    </ul>
+</div>
+
+<div class="rightside">
+ 
+  <iframe name="myiframe"> </iframe>
+  </div>
+</div>
+
+                           

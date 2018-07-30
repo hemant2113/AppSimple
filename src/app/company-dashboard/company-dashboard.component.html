@@ -1,0 +1,104 @@
+<app-company-header></app-company-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+<main>
+    <div class="pagehead">
+       <div class="container nopadd">
+          <div class="card-body">
+                
+             <h4 class="card-title">
+                    <div *ngIf="logo == null;then content else other_content">here is ignored</div>    
+                    <ng-template #content>{{company_name}}</ng-template>
+                    <ng-template #other_content><img src="{{logo}}" class="companylogo"/>   </ng-template>
+                   
+                <button class="btn btn-success pageheadbtn" id="addcomBtn" (click)="pathChange()" >Manage Nurture</button>
+         
+            </h4>
+             </div>
+       </div>
+    </div>
+    
+    <div class="container">
+       <div class="col-sm-12 nopadd">
+          <div class="col-sm-12 dashboxfull">
+             <div class="col-sm-12">
+                <h1>Manage Company Detail</h1>
+                <div class="col-sm-12 dashdetailbox">
+                    <form (submit) = "onSubmit($event)">
+                        <div class="form-group">
+                               
+                            <input type="hidden" [(ngModel)]="id" name="id" class="form-control" >
+                            <input type="hidden" [(ngModel)]="company_name" class="form-control" name="company_name">
+                        </div>
+                        <div class="text-center">
+                            
+                        </div>
+                    
+                        <div class="form-group">
+                            <label>Url</label>
+                            <input type="text" disabled  [(ngModel)]="company_url" name="company_url" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                                <label for="companyLogo">Company Logo :</label>
+                                <div class="clearfix"></div>
+                        <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                            </div>
+                            <div  class="col-sm-3"> 
+                                    <div class="col-sm-6">
+                                    <img *ngIf="selectLogo" [src]="imageUrl"  class="img-responsive"></div>
+                                    <!-- <a *ngIf="selectLogo" (click)="LogoRemove()">Remove</a> -->
+                                <!-- 2nd image -->
+                                <div class="col-sm-6">
+                                <img *ngIf="logo && selectLogo ==false" src="{{logo}}"  class="img-responsive">
+                                </div>
+                                </div>
+                        </div>
+<div class="clearfix"></div>
+                        <!-- fav icon -->
+                        <div class="form-group">
+                                <label for="companyLogo">Favicon Icon :</label>
+                                <div class="clearfix"></div>
+                        <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+                            </div>
+                            <div  class="col-sm-3"> 
+                                <div class="col-sm-6">
+                                <img *ngIf="selectFavicon" [src]="favUrl"  class="img-responsive"></div>
+                                <!-- <a (click)="FaviconRemove()">Remove</a> -->
+                            <!-- 2nd image -->
+                            <div class="col-sm-6">
+                            <img *ngIf="favicon  && selectFavicon ==false" src="{{favicon}}"  class="img-responsive">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- fav icon -->
+
+                        <!-- <div class="form-group">
+                                <label>Header Script : </label>
+                               
+                                <textarea type="text"  [(ngModel)]="header_script" name="header_script" class="form-control" ></textarea>
+                        </div> -->
+                        <div class="form-group">
+                                <label>Hubspot Tracking id : </label>
+                                <input type="text"  [(ngModel)]="body_script" name="body_script" class="form-control" >
+                        </div>
+                    <div class="clearfix"></div>
+                    
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-block btn-success">
+                    </div>
+                </form>
+                </div>
+             </div>
+          </div>
+       </div>
+     
+       <!-- Large modal --> 
+    </div>
+ </main>
+
+</ng-template>
+

@@ -1,0 +1,125 @@
+<app-company-header></app-company-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+<main>
+  <div class="pagehead">
+    <div class="container nopadd">
+      <div class="card-body">
+        <h4 class="card-title">
+          {{company_name}}
+          <a class="btn btn-success pageheadbtn" routerLink="/company-nurture/{{company}}"><i class="fas fa-plus"></i>Nurture</a> 
+          <!-- <a class="btn btn-success pageheadbtn" routerLink="/"><i class="fas fa-plus"></i>Add Nurture</a>  -->
+        
+          {{company_id}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="addnurturesection">
+    <div class="container">
+      <div class="col-sm-12">
+        <h1>Edit Nurture</h1>
+      </div>
+      <div class="col-sm-12 card" >
+        <div class="card-body">
+        <div class="dashdetailbox">
+        <form (submit)="onSubmmit($event)" >
+         
+            <div class="form-group">
+              <label>Nurture Name</label>
+              <input type="text" class="form-control" [(ngModel)]="nurture_name" required="required" name="nurture_name" >
+              <input type="hidden"  [(ngModel)]="company" name="company" >
+            </div>
+            <div class="form-group">
+              <label>Nurture Description</label>
+              <textarea class="form-control" required="required" name="nurture_desc" [(ngModel)]="nurture_desc" max-height="200"></textarea>
+            </div>
+            <div class="form-group clearfix">
+              <span class="addfields btn btn-info" style="float:right;" (click)="addNewColumn()">Add Column</span>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-5 nopadd">
+                <label>Assign Url Name</label>
+              </div>
+              <div class="col-sm-7">
+                <label>Add Url Links With Https/Http</label>
+              </div>
+            </div>
+            <div class="form-group" *ngFor="let nurture_url of nurtue_url_obj; let i = index; ">
+              <div class="col-sm-5 nopadd" >
+                <input type="text" class="form-control"  [(ngModel)]="nurture_url.name" name="{{i}}" value="{{nurture_url.name}}">
+              </div>
+              <div class="col-sm-7">
+                <input type="url" class="form-control" [(ngModel)]="nurture_url.url" name="{{i+'u'}}" value="{{nurture_url.url}}">
+                <button type="button" class="remove btn btn-danger"  (click)="removeRow(nurture_url)">x</button>
+              </div>
+              <!-- <div class="col-sm-12">
+                    
+                <input type="text" class="form-control" [(ngModel)]="nurture_url.doc_script" name="{{i+'p'}}" value="{{nurture_url.doc_script}}">
+                
+                
+              </div> -->
+            </div>
+         
+
+
+
+
+
+
+
+
+
+
+
+            
+            <!-- ******************************************************************************* -->
+            <div class="form-group addbtnbottom">
+              <button type="submit" class="btn btn-success">Update Detail</button>
+            </div>
+         
+          <!-- Large modal -->
+        </form>
+        <div class="col-sm-12 editfristfieldremovebtnnone">
+            <fieldset  *ngFor="let column of columns; let i = index">
+              <div class="col-sm-5 nopadd">
+                <label for="urlName"></label>
+                <input type="text" class="form-control" id="urlName" required  [(ngModel)]="column.name" name="urlName" #urlName="ngModel">
+                <div *ngIf="urlName.errors && (urlName.dirty || urlName.touched)" class="alert-danger">
+                  <div [hidden]="!urlName.errors.required">
+                    URL Name is required!
+                  </div>
+                  
+                </div>
+              </div>
+          
+          
+                <div class="col-sm-7">
+                <label for="url"></label>
+                <input type="text" class="form-control" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
+                <div *ngIf="url.errors && (url.dirty || url.touched)" class="alert-danger">
+                  <div [hidden]="!url.errors.required">
+                    URL is required!
+                  </div>
+                  <div [hidden]="!url.errors.pattern">
+                    Must be a valid URL!
+                  </div>
+                </div>
+               <button type="button" class="remove btn btn-danger"  (click)="removeColumn(i)">x</button>
+        
+              </div>
+              <!-- <div class="col-sm-12 form-group nopaddleft">
+                <textarea  class="form-control" placeholder="Document Script (Optional)" [(ngModel)]="column.doc_script" name="doc_script"></textarea>
+                      </div> -->
+            </fieldset>
+          </div>
+      </div>
+      </div>
+       
+      </div>
+    </div>
+  </div>
+</main>
+
+</ng-template>

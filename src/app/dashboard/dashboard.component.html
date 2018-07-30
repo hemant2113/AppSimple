@@ -1,0 +1,241 @@
+
+<!-- <link rel="icon" type="favicon" href="https://u01.appmifile.com/images/2017/01/10/5ff42275-9ced-4d1b-9479-0af5dfd94c9c.png" /> -->
+<!-- <link rel="icon" href="https://u01.appmifile.com/images/2017/01/10/5ff42275-9ced-4d1b-9479-0af5dfd94c9c.png" type="image/x-icon"> -->
+
+<app-header></app-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+
+
+
+    
+    <main>
+        <div class="pagehead">
+           <div class="container">
+              <div class="card-body paddleftright0px">
+                 <h4 class="card-title">
+                    Company List
+                    <!-- <button class="btn btn-success pageheadbtn" id="addcomBtn" (click)="openModal(template)" style="
+                       margin-left: 22px;
+                       ">Add User</button> -->
+                    <button class="btn btn-success pageheadbtn" id="addcomBtn" (click)="openModal(templateT)">Add Company</button>
+                 </h4>
+              </div>
+           </div>
+        </div>
+        <div class="container">
+           <div class="card">
+              <table class="table table-hover table-bordered">
+                 <thead>
+                    <tr>
+                       <th scope="col" width="5%">S. No.</th>
+                       <th scope="col" width="15%">Company Logo</th>
+                       <th scope="col" width="20%">Company Name</th>
+                       <th scope="col" width="35%">Url's</th>
+                       <th scope="col" width="25%">Manage</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let post of posts;let i=index ">
+                       <th scope="row">{{i+1}}</th>
+                       <td><img src="{{post.logo}}" style="width:50px;max-height: 50px;"/></td>
+                       <td>{{post.name}}</td>
+                       <td>{{post.url}}</td>
+                       <td  width="25%">
+                          <button class="btn btn-sm btn-secondary btngap"  (click)="openModal(templateE) || editcompany(post.id)">Edit</button>
+                          <button class="btn btn-sm btn-secondary btngap" routerLink="/user-manage/{{post.id}}">Manage </button>
+                          
+                          <!-- <button class="btn btn-sm btn-danger btngap" (click)="deleteComapny(post)">Delete</button> -->
+                          <button class="btn btn-sm btn-danger btngap" (click)="openModal(delete) || idSet(post)">Delete</button>
+
+                          
+                        </td>
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+           <!-- Large modal -->
+        </div>
+     </main>
+     <!-- Add company The Modal -->
+
+
+     <!-- Edit company The Modal -->
+     <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content popupbox">
+           <span class="close" (click)="closepopup('myModal')" >&times;</span>
+           <div>
+           </div>
+        </div>
+     </div>
+     <!---->
+     <footer></footer>
+     <!-- Optional JavaScript -->
+     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     <!-- <button type="button" class="btn btn-info" 
+        (click)="openModal(template)">Cbuttpjiunhgfr</button> -->
+    
+     <ng-template #templateT>
+        <div class="modal-header">
+           <h4 class="modal-title pull-left">Add Company</h4>
+           <button type="button" class="close pull-right" 
+              aria-label="Close" (click)="modalRef.hide() || hide()">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form name="form" (ngSubmit)="f.form.valid && addCompany($event.target.files)" #f="ngForm" #imageForm=ngForm novalidate>
+           <div class="form-group">
+              <label for="companyName">Comapny Name :</label>
+              <input type="text" class="form-control" name="companyName" [(ngModel)]="model.companyName" #companyName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && companyName.invalid }" required />
+              <div *ngIf="f.submitted && companyName.invalid" class="invalid-feedback">
+                 <div *ngIf="companyName.errors.required">Comapny Name is required</div>
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="companyUrl">Company Url :</label>
+              <input type="text" class="form-control" name="companyUrl" [(ngModel)]="model.companyUrl" #companyUrl="ngModel" [ngClass]="{ 'is-invalid': f.submitted && companyUrl.invalid }" required />
+              <div *ngIf="f.submitted && companyUrl.invalid" class="invalid-feedback">
+                 <div *ngIf="companyUrl.errors.required">Company Url is required</div>
+              </div>
+           </div>
+           <div class="form-group">
+                <label for="companyUrl">Hubspot Tracking id :</label>
+                <input type="text" class="form-control" name="hubspotid" [(ngModel)]="model.hubspotid" #hubspotid="ngModel"  />
+              
+             </div>
+           <div class="form-group">
+              <label for="companyLogo">Company Logo :</label>
+              <div class="clearfix"></div>
+              <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+              </div>
+              <div class="col-sm-3"> 
+                  <div class="defaultimg">
+                  <img *ngIf="imageUrl != ''" [src]="imageUrl">
+                </div>
+                </div>
+           </div>
+           <div class="clearfix"></div>
+                                           
+           <div class="form-group">
+                <label for="companyLogo">Favicon Icon :</label>
+                <div class="clearfix"></div>
+           <div class="col-sm-9 nopadd"> 
+                <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+            </div>
+            <div class="col-sm-3"> 
+                    <div class="defaultico">
+                <img *ngIf="favUrl != ''" [src]="favUrl" >
+            </div>
+    </div>
+            <!-- 2nd image -->
+
+          
+        </div>
+        <div class="clearfix"></div>
+        <!-- fav icon -->
+           <div class="form-group">
+              <button class="btn btn-primary">Submit</button>
+           </div>
+           </form>
+        </div>
+     </ng-template>
+     <ng-template #templateE>
+        <div class="modal-header">
+           <h4 class="modal-title pull-left">Edit Company Detail</h4>
+           <button type="button" class="close pull-right" 
+              aria-label="Close" (click)="modalRef.hide() || hide()">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form (submit) = "addCompanyTwo($event)">
+              <div class="form-group">
+                 <input type="hidden" [(ngModel)]="id" name="id" class="form-control">
+              </div>
+              <div class="text-center">
+              </div>
+              <div class="form-group">
+                 <label>Company Name</label>
+                 <input type="text" [(ngModel)]="company_name" name="company_name" class="form-control">
+              </div>
+              <div class="form-group">
+                 <label>Url</label>
+                 <input type="text" [(ngModel)]="company_url" name="company_url" class="form-control" >
+              </div>
+              <div class="form-group">
+                    <label>Hubspot Tracking id :</label>
+                    <input type="text" [(ngModel)]="tracking_id" name="tracking_id" class="form-control" >
+                 </div>
+              <div class="form-group">
+                 <label for="companyLogo">Company Logo :</label>
+                 <div class="clearfix"></div>
+                 <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                 </div>
+                
+                 <!-- <div *ngIf="logo != null && imageUrl == '../assets/img/default-logo.png'"><img src="{{logo}}" style="max-width:100px;max-height:100px"/></div> -->
+                 <div *ngIf="logo != null && lValue == false;then content ">here is ignored</div>    
+                 <ng-template #content><img src="{{logo}}" style="max-width:100px;max-height:100px"/></ng-template>
+                
+                 <div *ngIf="lValue"><img [src]="imageUrl"  style="max-width:100px;max-height:100px"/></div>    
+                
+
+                
+                 
+                
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="form-group">
+                    <label for="companyLogo">Favicon Icon :</label>
+                    <div class="clearfix"></div>
+            <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+                </div>
+                <div *ngIf="favicon != null ;then contentt else other_contentt">here is ignored</div>    
+                 <ng-template #contentt><img src="{{favicon}}" style="max-width:100px;max-height:100px"/></ng-template>
+                 <ng-template #other_contentt><img [src]="favUrl"  style="max-width:100px;max-height:100px">  </ng-template>
+                
+                 <div *ngIf="fValue"><img [src]="favUrl"  style="max-width:100px;max-height:100px"/></div>    
+                
+                
+            </div>
+            <div class="clearfix"></div>
+            
+              
+              <div class="form-group">
+                 <input type="submit" value="Submit" class="btn btn-block btn-success">
+              </div>
+           </form>
+        </div>
+     </ng-template>
+
+
+
+
+     <!-- delete Popup -->
+     <ng-template #delete>
+        <div class="modal-header">
+           <h4 class="modal-title pull-left">Confirm Deletion </h4>
+           <button type="button" class="close pull-right" 
+              aria-label="Close" (click)="modalRef.hide() || hide()">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to permanently delete this Company <b>{{delete_id.name}}</b></p> 
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" (click)=deleteComapny(delete_id)>Yes</button> 
+            <button class="btn btn-primary" (click)="modalRef.hide() || hide()" >No</button> 
+        </div>
+     </ng-template>
+
+
+
+
+
+
+</ng-template>

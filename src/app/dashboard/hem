@@ -1,0 +1,195 @@
+<header>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">INSTASPIEL</a>
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float: right;">
+         <ul class="list-inline header-top usertopbox">
+                                      <li class="dropdown">
+                                          <button (click) = "logout_user()" class="btn-link" style="color:#ffffff;margin-top:15px;">
+                                            Logout
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                              <li>
+                                                  <div class="navbar-content topboxpad">
+                                                      <span>Rushal</span>
+                                                      <p class="text-muted small">
+                                                          rushal@instaspiel.com
+                                                      </p>
+                                                      <div class="divider">
+                                                      </div>
+                                                      <button href="index.html" class="btn" (click)="logout_user()">Logout</button>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                      </li>
+                                  </ul>
+              </div>
+      </nav>
+  </header>
+
+
+<main>
+  <div class="pagehead">
+    <div class="container">
+    <div class="card-body paddleftright0px">
+ <h4 class="card-title">Company List
+  <button class="btn btn-sm btn-secondary btngap" id="addcomBtn" (click)="addcompany()">Add Company</button>
+</h4>
+</div>
+</div>
+  </div>
+<div class="container">
+
+    <div class="card">
+
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">S. No.</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Url's</th>
+                <th scope="col">Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let post of posts;let i=index ">
+                <th scope="row">{{i+1}}</th>
+                <td>{{post.name}}</td>
+
+                <td>{{post.url}}</td>
+                <td  width="25%">
+                    <button class="btn btn-sm btn-secondary btngap" id="myBtn" (click)="editcompany(post.id)">Edit</button>
+                    <button class="btn btn-sm btn-secondary btngap" href="#">Manage user</button>
+                    <button class="btn btn-sm btn-danger btngap" (click)="deleteComapny(post.id)">Delete</button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+    </div>
+    <!-- Large modal -->
+</div>
+</main>
+
+
+<!-- Add company The Modal -->
+<div id="AddCompany" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content popupbox">
+    <span class="close" (click)="closepopupcom('AddCompany')" >&times;</span>
+    <div>
+      <form (submit) = "addCompanyTwo($event)">
+        <div class="form-group">
+            <label>Compan</label>
+          <input type="text" required [(ngModel)]="company_name" class="form-control" name="company_name" id="listname" placeholder="Enter Company Name">
+        </div>
+       
+        <div class="form-group">
+          <input type="text" required class="form-control" [(ngModel)]="company_url" name="company_url" id="listname" placeholder="Enter Company Url">
+        </div>
+        
+      <br/>
+      <div class="form-group">
+          <input type="file" nv-file-select uploader="{FileUploader}"/>
+      </div>
+       
+      <div class="form-group text-center">
+         <button type="submit" class="btn btn-block btn-success">Add Detail</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!---->
+<!-- Edit company The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content popupbox">
+    <span class="close" (click)="closepopup('myModal')" >&times;</span>
+    <div>
+      <form (submit) = "addCompany($event)">
+        <input type="hidden" [(ngModel)]="id" name="id" >
+        <div class="text-center">
+          <h4 class="popuphead">Edit Company Detail</h4>
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+        <input type="text" [(ngModel)]="company_name" name="company_name" class="form-control">
+      </div>
+      <div class="form-group">
+          <label>Url</label>
+          <input type="text" [(ngModel)]="company_url" name="company_url" class="form-control" >
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-block btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<form ng-app="fileUpload" ng-controller="MyCtrl" name="form">
+  Single Image with validations
+  <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+    ngf-resize="{width: 100, height: 100}">Select</div>
+  Multiple files
+  <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+  Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+  <button type="submit" ng-click="submit()">submit</button>
+</form>
+
+
+<footer>
+</footer>
+
+<script src="angular(.min).js"></script>
+<script src="ng-file-upload-shim(.min).js"></script> <!-- for no html5 browsers support -->
+<script src="ng-file-upload(.min).js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      btn.onclick = function() {
+          modal.style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+    </script>
+    

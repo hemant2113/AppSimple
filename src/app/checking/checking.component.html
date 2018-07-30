@@ -1,0 +1,113 @@
+
+
+<div class="container-fluid nopadd" >
+    <div class="leftside">
+      
+      <div class="logo"> <img src="{{logo}}"> </div>
+      
+      <ul class="nav leftnav" >
+          <li (click)="select(i)" 
+          [ngClass]="{'active': selectedIndex == i, 'list-group-item': true}" 
+          *ngFor="let nurtureurl of nurture_url_obj; let i =index">
+           
+           
+
+         
+
+        <div *ngIf="nurtureurl.url.search('.pdf') == -1 ; else pdfexist">
+            <a (click)="urlAppend(nurtureurl.url_name_show) || docScript('/'+nurtureurl.doc_script) || setTitle(nurtureurl.name)" href="{{nurtureurl.url}}" *ngIf="nurtureurl.url.search('.pdf') == -1" target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+        </div>
+        <ng-template #pdfexist>
+            
+                    <div *ngIf="nurtureurl.url.search('https://docs.google.com/viewer?') >= 0 ; else googlepdfexist">
+       
+                        <a (click)="urlAppend('-'+nurtureurl.url_name_show) || docScript(nurtureurl.doc_script) || setTitle(nurtureurl.name)" href="{{nurtureurl.url}}"  target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+                         
+
+                    </div>
+                    <ng-template #googlepdfexist>
+                            <a (click)="urlAppend(nurtureurl.url_name_show) || docScript(nurtureurl.doc_script)  || setTitle(nurtureurl.name)" href="https://docs.google.com/viewer?url={{nurtureurl.url}}&embedded=true&output=embed" *ngIf="nurtureurl.url.search('.pdf') != -1" target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+
+
+                    </ng-template>
+
+
+
+        </ng-template>
+      </ul>
+
+
+    </div>
+
+
+   
+    <div class="rightside">
+          <iframe name="myiframe"> </iframe>
+         
+      </div>
+
+      <!-- <button class="btn btn-success mobileblock mobilemenubtn" style="z-index: 9999999;" (click)="openModal(template)">NEXT SELECTION</button> -->
+    
+    </div>
+    
+                               
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- mh -->
+    
+    
+    
+    <!-- <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Select Menu</h4>
+          <button type="button" class="close pull-right" 
+            aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ul class="nav leftnav" >
+                <li (click)="select(i)" 
+                [ngClass]="{'active': selectedIndex == i, 'list-group-item': true}" 
+                *ngFor="let nurtureurl of nurture_url_obj; let i =index">
+                 
+                 
+      
+               
+      
+              <div *ngIf="nurtureurl.url.search('.pdf') == -1 ; else pdfexist">
+                  <a (click)="urlAppend(nurtureurl.url_name_show) || docScript(nurtureurl.doc_script) " href="{{nurtureurl.url}}" *ngIf="nurtureurl.url.search('.pdf') == -1" target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+              </div>
+              <ng-template #pdfexist>
+                  
+                          <div *ngIf="nurtureurl.url.search('https://docs.google.com/viewer?') >= 0 ; else googlepdfexist">
+                              
+                              <a (click)="urlAppend(nurtureurl.url_name_show) || docScript(nurtureurl.doc_script) " href="{{nurtureurl.url}}"  target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+                               
+      
+                          </div>
+                          <ng-template #googlepdfexist>
+                                  <a (click)="urlAppend(nurtureurl.url_name_show) || docScript(nurtureurl.doc_script)  " href="https://docs.google.com/viewer?url={{nurtureurl.url}}&embedded=true&output=embed" *ngIf="nurtureurl.url.search('.pdf') != -1" target="myiframe" class="url_link" ng-class="{test: 'i == 0'}" ><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurtureurl.name}}</span></a>
+      
+                          </ng-template>
+      
+      
+      
+              </ng-template>
+            </ul>
+        </div>
+      </ng-template> -->
+    
+    
+    
+    
+    
+    
+    
+    

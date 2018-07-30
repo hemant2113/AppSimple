@@ -1,0 +1,211 @@
+<app-header></app-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+   <main>
+      <div class="pagehead">
+         <div class="container nopadd">
+            <div class="card-body">
+               <h4 class="card-title"> 
+                   
+                    <div *ngIf="company_logo == null;then content else other_content">here is ignored</div>    
+                    <ng-template #content>{{company_name}}</ng-template>
+                    <ng-template #other_content><img src="{{company_logo}}"/>   </ng-template>
+                
+                  <button  type="button"  (click)="openModal(template)" class="btn btn-success pageheadbtn" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add User</button> 
+                  <button class="btn btn-success pageheadbtn" (click)="manageNurturePath()"><i class="fas fa-plus"></i> Manage Nurture</button> 
+                  <a routerLink="../../dashboard" class="btn btn-success pageheadbtn" style="margin-right:10px;">Company List</a>
+               </h4>
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <div class="col-sm-12" >
+            <h1>User List</h1>
+            <div class="card">
+               <table class="table table-hover">
+                  <thead>
+                     <tr>
+                        <th scope="col" width="80px">S. No.</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Manage</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let user of users; let i = index">
+                        <th width="80px">{{i+1}}</th>
+                        <td>{{user.first_name}}</td>
+                        <td>{{user.email}}</td>
+                        <td  width="20%">
+                           <a class="btn btn-sm btn-default" (click)="openModal(templateEdit) || edit(user.user)">Edit</a>&nbsp;
+                           <!-- <a class="btn btn-sm btn-danger" (click)="delete(user)">Delete</a> -->
+                           <a class="btn btn-sm btn-danger btngap" (click)="openModal(delete) || idSet(user)">Delete</a>
+   
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <!-- Large modal -->
+         </div>
+      </div>
+   </main>
+   <!-- <button type="button" class="btn btn-info" 
+      (click)="openModal(template)">Cbuttpjiunhgfr</button> -->
+   <ng-template #template>
+      <div class="modal-header">
+         <h4 class="modal-title pull-left">Create User</h4>
+         <button type="button" class="close pull-right" 
+            aria-label="Close" (click)="modalRef.hide()">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 offset-md-2">
+               <h3></h3>
+               <form name="form" (ngSubmit)="f.form.valid && onSubmitUser($event)" #f="ngForm" #imageForm=ngForm novalidate>
+               <div class="form-group">
+                  <label for="firstName">First Name :</label>
+                  <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+                  <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                     <div *ngIf="firstName.errors.required">First Name is required</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="lastName">last Name :</label>
+                  <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required />
+                  <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+                     <div *ngIf="lastName.errors.required">Last Name is required</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" (keyup)="onKey($event)" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                     <div *ngIf="email.errors.required">Email is required</div>
+                     <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                  </div>
+               </div>
+               <p *ngIf="red" class="redtext">{{email_msg}}</p>
+               <p *ngIf="green" class="redtext">{{email_msg}}</p>
+               <div class="form-group">
+                  <input type="hidden" class="form-control" name="role" value="3" />
+               </div>
+               <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                  <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                     <div *ngIf="password.errors.required">Password is required</div>
+                     <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <button class="btn btn-primary">Register</button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </ng-template>
+   <ng-template #templateEdit>
+      <div class="modal-header">
+         <h4 class="modal-title pull-left">Edit User</h4>
+         <button type="button" class="close pull-right" 
+            aria-label="Close" (click)="modalRef.hide()">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 offset-md-2">
+               <h3></h3>
+               <form name="form" (ngSubmit)="f.form.valid && onSubmitUserEdit($event)" #f="ngForm" #imageForm=ngForm novalidate>
+               <input type="hidden" class="form-control" name="id" [(ngModel)]="model.id" #id="ngModel" />
+               <div class="form-group">
+                  <label for="firstNameE">First Name :</label>
+                  <input type="text" class="form-control" name="firstNameE" [(ngModel)]="model.firstNameE" #firstNameE="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstNameE.invalid }" required />
+                  <div *ngIf="f.submitted && firstNameE.invalid" class="invalid-feedback">
+                     <div *ngIf="firstNameE.errors.required">First Name is required</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="lastNameE">last Name :</label>
+                  <input type="text" class="form-control" name="lastNameE" [(ngModel)]="model.lastNameE" #lastNameE="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastNameE.invalid }" required />
+                  <div *ngIf="f.submitted && lastNameE.invalid" class="invalid-feedback">
+                     <div *ngIf="lastNameE.errors.required">Last Name is required</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="emailE">Email</label>
+                  <input type="text" class="form-control" name="emailE" [(ngModel)]="model.emailE" #emailE="ngModel" [ngClass]="{ 'is-invalid': f.submitted && emailE.invalid }" required emailE />
+                  <div *ngIf="f.submitted && emailE.invalid" class="invalid-feedback">
+                     <div *ngIf="emailE.errors.required">Email is required</div>
+                     <div *ngIf="emailE.errors.email">Email must be a valid email address</div>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <button class="btn btn-primary">Submit</button>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </ng-template>
+   <ng-template #templateUrl>
+      <div class="modal-header">
+         <h4 class="modal-title pull-left">Modal</h4>
+         <button type="button" class="close pull-right" 
+            aria-label="Close" (click)="modalRef.hide()">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="modal-body">
+         This is a modal.
+      </div>
+   </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- delete Popup -->
+        <ng-template #delete>
+            <div class="modal-header">
+               <h4 class="modal-title pull-left">Confirm Deletion </h4>
+               <button type="button" class="close pull-right" 
+                  aria-label="Close" (click)="modalRef.hide()">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to permanently delete this User <b>{{delete_id.first_name}}</b></p> 
+              <p><b>{{delete_id.email}}</b></p> 
+
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-danger" (click)="deleteUser(delete_id)">Yes</a> 
+                <a class="btn btn-primary" (click)="modalRef.hide()" >No</a> 
+            </div>
+         </ng-template> 
+
+
+</ng-template>

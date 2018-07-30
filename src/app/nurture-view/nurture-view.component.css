@@ -1,0 +1,189 @@
+header{display:none!important;}
+a {
+	color: #222222;
+	text-decoration: none;
+}
+.nopadd {
+	padding: 0px;
+}
+.leftside {
+	height: 100vh;
+	max-width: 238px;
+	z-index: 9;
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	width: 100%;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	overflow-y: auto;
+}
+.logo {
+	text-align: center;
+	padding: 20px 0 ;
+	border: 1px solid #e5e5e5;
+}
+.logo img {
+	width: 100%;
+	max-width: 170px;
+}
+ul.leftnav {
+	padding: 0;
+	margin: 0px;
+	list-style: none;
+	width: 100%;
+	display: inline-block;
+}
+ul.leftnav li {
+	display: block;
+	width: 100%;
+	list-style: none;
+	padding: 0px;
+	margin:0px;
+}
+ul.leftnav li a {
+	width: 100%;
+	display: inline-block;
+	padding: 20px;
+	position: relative;
+	font-family: Tahoma;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 20px;
+	text-decoration: none;
+	background:none;
+	border-bottom:1px solid #e5e5e5;
+}
+ul.leftnav li:hover {
+	background-color: #e5e5e5;
+}
+.rightside {
+	width: calc(100% - 238px);
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+.rightside iframe {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	height: 100%;
+}
+.rightside embed {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	height: 100%;
+}
+.bottomnextbutton {
+	position: fixed;
+	right: 0;
+	bottom: 70px;
+	padding: 18px 16px;
+	box-shadow: 0 0 40px -8px rgba(0,0,0,.5);
+	width: 100%;
+	max-width: 180px;
+	background-color: rgb(26, 196, 235);
+	color: rgb(255, 255, 255);
+	font-weight: normal;
+}
+.bottomnextbutton a {
+	text-decoration: none!important;
+}
+.bottomnextbutton .next {
+	font-size: 24px;
+	line-height: 30px;
+	color: #fff;
+}
+.bottomnextbutton .next i {
+	font-size: 19px;
+	line-height: 20px;
+	position: relative;
+	left: 5px;
+	top: -1px;
+}
+.mobileblock {
+	display: none;
+}
+.webblock {
+	display: block;
+}
+.mobilemenu {
+	display: none;
+}
+@media only screen and (max-width: 767px) {
+.bottomnextbutton {
+	display: none;
+}
+.nav-toggle.hide::before {
+	content: "+";
+	font-family: 20px;
+	font-weight: bold;
+	position: absolute;
+	right: 10px;
+	top: 18px;
+}
+.nav-toggle::before {
+	content: "-";
+	font-family: 20px;
+	font-weight: bold;
+	position: absolute;
+	right: 10px;
+	top: 18px;
+}
+.nav-toggle {
+	text-align: center;
+	padding: 10px 0px;
+	display: inline-block;
+	width: 100%;
+	color: #fff;
+}
+.leftside {
+	display: none
+}
+.mobilemenu {
+	display: inline-block;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	background: rgb(33, 53, 66);
+	padding: 5px 0;
+	z-index: 11000;
+}
+.rightside {
+	width: 100%;
+	display: block;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	position: absolute;
+	top: 0;
+	bottom: 0px;
+}
+.mobileblock {
+	display: block;
+}
+.webblock {
+	display: none;
+}
+.mobilemenu .item a {
+	float: left;
+	width: 45%;
+	padding: 10px;
+	background: #fff;
+	margin: 0px 2%;
+	height: 100%;
+	text-decoration: none;
+	border-radius: 10px;
+	line-height: 18px;
+	font-size: 14px;
+}
+.mobilemenu .item a:hover {
+	background-color: #e5e5e5;
+}
+}

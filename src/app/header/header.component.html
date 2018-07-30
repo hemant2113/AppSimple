@@ -1,0 +1,22 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a routerLink="/overview" class="navbar-brand"><img src="https://s3.us-east-2.amazonaws.com/instaspiel/instaspiel_logo.png"> </a>
+      
+      
+        <a routerLink="/dashboard" class="navinner">Dashboard</a>
+     
+      
+      <div class="dropdown">
+            <button class="dropbtn">{{user}} <i class="caret"></i></button>
+            <div class="dropdown-content">
+                
+                 <a href="/admin/change-password" class="btn btn-link headerlink" >Change Password</a>
+                 <a (click)="logout()" class="btn btn-link headerlink" >Logout</a>
+            </div>
+          </div>
+    </nav>
+</header>
+
+
+
+

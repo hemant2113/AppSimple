@@ -1,0 +1,299 @@
+<app-company-header></app-company-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+<main>
+  <div class="pagehead">
+    <div class="container nopadd">
+      <div class="card-body">
+        <h4 class="card-title">
+            <div *ngIf="company_logo == null;then content else other_content">here is ignored</div>    
+            <ng-template #content>{{company_name}}</ng-template>
+            <ng-template #other_content><img src="{{company_logo}}" class="companylogo"/>   </ng-template>
+            / Manage Nurture
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div class="addnurturesection">
+    <div class="container">
+      <h1>Add Nurture</h1>
+      <div class="card">
+        <div class="card-body">
+            <div class="dashdetailbox">
+          <!-- **************************************************************************************** -->
+          <form   (ngSubmit)="f.form.valid && addNurture($event)" #f="ngForm" novalidate>
+        
+
+
+            <div class="form-group">
+              <label for="title">Nurture</label>
+              <input type="text" class="form-control" id="title" required minlength="3" maxlength="500" [(ngModel)]="model.title" name="title" #title="ngModel">
+              <div *ngIf="title.errors && (title.dirty || title.touched)" class=" alert-danger">
+                <div [hidden]="!title.errors.required">
+                  Nurture name is required!
+                </div>
+                <div [hidden]="!title.errors.minlength">
+                  Title must be at least 3 characters long.
+                </div>
+                <div [hidden]="!title.errors.maxlength">
+                  Title cannot be more than 30 characters long.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="author">Description</label>
+              <input type="text" class="form-control" id="author"  [(ngModel)]="model.description" name="author" #author="ngModel">
+             
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- {{columns |json}} -->
+          <div class="clearfix"></div>
+          <div class="form-group addbtnbottom">
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+          <!-- Large modal -->
+          </form> 
+          
+              <div class="form-group">
+                <span class="addfields btn btn-info" style="float:right;" (click)="addNewColumn()">Add Row</span>
+              </div>
+              <div class="col-sm-12 nopadd">
+                <div class="col-sm-5 nopadd"><label>Assign URL Name</label></div>
+                <div class="col-sm-7"><label>Add Url Links With Https/Http</label></div>
+              </div>
+          <div class="col-sm-12 nopadd fristfieldremovebtnnone">
+              <fieldset  *ngFor="let column of columns; let i = index">
+                <div class="col-sm-5 nopadd">
+                  <label for="urlName">URL Name</label>
+                  <input type="text" class="form-control" id="urlName" required  [(ngModel)]="column.name" name="urlName" #urlName="ngModel">
+                  <div *ngIf="urlName.errors && (urlName.dirty || urlName.touched)" class="alert-danger">
+                    <div [hidden]="!urlName.errors.required">
+                      URL Name is required!
+                    </div>
+                    
+                  </div>
+                </div>
+            
+            
+                  <div class="col-sm-7">
+                  <label for="url">URL</label>
+                  <input type="text" class="form-control" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
+                  <div *ngIf="url.errors && (url.dirty || url.touched)" class="alert-danger">
+                    <div [hidden]="!url.errors.required">
+                      URL is required!
+                    </div>
+                    <div [hidden]="!url.errors.pattern">
+                      Must be a valid URL!
+                    </div>
+                  </div>
+                                    <button type="button" class="remove btn btn-danger"  (click)="removeColumn(i)">x</button>
+  
+                </div>
+            
+                <!-- <div class="col-sm-12 form-group nopaddleft">
+                  <textarea  class="form-control" placeholder="Document Script (Optional)" [(ngModel)]="column.doc_script" name="doc_script"></textarea>
+                </div> -->
+         
+              
+             </fieldset>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="msg">{{columns |json}}</div> -->
+  <!-- **************************************************************************************** -->
+  <div class="container">
+    <div class="col-sm-12" >
+      <h1>Nurture List
+        <a style="float:right;" type ="button" href="http://{{company_url}}" class="btn btn-sm btn-danger"  class="btn btn-sm btn-info"  [target]="'_blank'">Preview :- {{company_name}}</a>
+      </h1>
+      <div class="card">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Assign Url Name</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nurture of  nurtures; let i =index;" >
+              <td width="15%"> {{nurture.name}}</td>
+              <td width="40%"> {{nurture.description}}</td>
+              <td width="30%">
+                <ol  class="assignurlbox" *ngFor="let nurtureurl of  nurtures_urls">
+                  <li  *ngIf="nurture.id == nurtureurl.nurture"><a href="{{nurtureurl.url}}" target="_blank">{{nurtureurl.name}}</a> 
+                    <button  class="btndetround" (click)="openModal(deleteSingleUrl)|| idSet(nurtureurl)">X</button>
+                  </li>
+                </ol>
+              </td>
+              <td width="20%">
+                <button class="btn btn-sm btn-secondary" (click)="nurtureEditPage(nurture.id)">Edit</button>
+                <!-- <button class="btn btn-sm btn-secondary" (click)="getNurtureDetails(nurture.id) || openModal(templateEdit)">Edit</button> -->
+                <!-- <button class="btn btn-sm btn-danger" (click)="deleteNurture(nurture.id)"  style="margin: 0px 5px;">Delete</button> -->
+
+                <button class="btn btn-sm btn-danger btngap" (click)="openModal(deleteNurtureCompany) || idSet(nurture)">Delete</button>
+
+
+                <a class="btn btn-sm btn-danger"  class="btn btn-sm btn-success" href="http://{{company_url}}/spiel/{{nurture.id}}-{{arr_url_nurture_name[i]}}/{{nurture_new_url_show[i]}}" class="btn btn-sm btn-danger"  class="btn btn-sm btn-success"  [target]="'_blank'" target="_blank">View</a>    
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Large modal -->
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+</ng-template>
+
+
+
+
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Nurture</h4>
+    <button type="button" class="close pull-right" 
+      aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  </div>
+</ng-template>
+<ng-template #templateEdit>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" 
+      aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (submit) = "nurtureEdit($event)">
+      <div class="text-center">
+      </div>
+      <div class="form-group">
+        <label>Nurture Name</label>
+        <input type="text" [(ngModel)]="nurture_name" name="nurture_name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Nurture Descrption</label>
+        <input type="text" [(ngModel)]="nurture_desc" name="nurture_desc" class="form-control" >
+      </div>
+     
+      <div class="clearfix"></div>
+      
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-block btn-success">
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #templateUrl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Nurture Name</h4>
+    <button type="button" class="close pull-right popupclosebtn" 
+      aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="overflow: hidden;">
+    <form>
+      <div class="form-group">
+        <button class="btn btn-success">Submit</button>
+      </div>
+      <div class="col-sm-12 nopadd addrowcontainer"></div>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+ <!-- delete Popup nurture -->
+ <ng-template #deleteNurtureCompany>
+  <div class="modal-header">
+     <h4 class="modal-title pull-left">Confirm Deletion </h4>
+     <button type="button" class="close pull-right" 
+        aria-label="Close" (click)="modalRef.hide()">
+     <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to permanently delete this Nurture <b>{{delete_id.name}}</b></p> 
+  </div>
+  <div class="modal-footer">
+      <a class="btn btn-danger" (click)="deleteNurture(delete_id)">Yes</a> 
+      <button class="btn btn-primary" (click)="modalRef.hide()" >No</button> 
+  </div>
+</ng-template>
+
+
+
+
+
+
+<!-- delete Popup nurture single url-->
+<ng-template #deleteSingleUrl>
+  <div class="modal-header">
+     <h4 class="modal-title pull-left">Confirm Deletion </h4>
+     <button type="button" class="close pull-right" 
+        aria-label="Close" (click)="modalRef.hide()">
+     <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to permanently delete this Nurture Url<b> {{delete_id.name}}</b></p> 
+  </div>
+  <div class="modal-footer">
+      <a class="btn btn-danger" (click)="urlDelete(delete_id)">Yes</a> 
+      <button class="btn btn-primary" (click)="modalRef.hide()" >No</button> 
+  </div>
+</ng-template>

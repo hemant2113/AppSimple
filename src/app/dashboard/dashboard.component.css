@@ -1,0 +1,32 @@
+.logoimg100{width:100px;height: 100px;}
+.defaultimg{
+    /* background-image: url(https://s3.us-east-2.amazonaws.com/instaspiel/default-logo.png); */
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background-size: contain;
+    background: #f5f5f5;
+    border:1px solid #ccc;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.defaultico{
+    /* background-image: url(https://s3.us-east-2.amazonaws.com/instaspiel/default-ico.png); */
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background-size: contain;
+    background: #f5f5f5;
+    border:1px solid #ccc;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.defaultimg img{
+    max-width: 100px;max-height:100px;
+}
+.defaultico img{
+    max-width: 100px;max-height:100px;
+}
+
+
+

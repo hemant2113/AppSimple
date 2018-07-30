@@ -1,0 +1,72 @@
+.adddeletebtn{
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: 4px;
+}
+.btndetround{    
+    display: inline-block;
+    padding: 0px;
+    width: 21px;
+    height: 20px;
+    background: #cc0000;
+    border-radius: 50%;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.addbtnbottom{
+    position: absolute;
+    bottom: 0px;
+    z-index: 999;
+}
+.addnurturesection{
+    background: #e5e5e5;
+    margin-top: -30px;
+}
+body {font-family:arial;}
+fieldset{
+    background:none;
+    padding: 0px;
+    border: 0px solid #D5D5D5;
+}
+.addfields{
+    margin: 10px 0;
+}
+fieldset[_ngcontent-c1]{
+    padding: 0px;
+    background: none;
+    border: 0px solid #333;
+}
+.msg {
+    padding: 10px;
+    background: rgb(227, 250, 227);
+    border: 1px solid rgb(171, 239, 171);
+    color: rgb(9, 56, 9);
+}
+.remove{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 2px 8px 4px;
+    position: absolute;
+    right: 0px;
+    top:0px;
+}
+.editremove{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 2px 8px 4px;
+    position: absolute;
+    right: 0px;
+    top:20px;
+}
+input[type="text"],
+select{
+    padding:5px;
+}
+.editfristfieldremovebtnnone{padding:0px 0px 60px 0px!important;}
+
+.required{
+    color: #cc0000;
+}

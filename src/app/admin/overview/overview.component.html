@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div *ngIf="loader else page" class="loader">
+    
+</div>
+<ng-template #page>
+
+<main>
+<div class="pagehead">
+  <div class="container nopadd">
+     <div class="card-body">
+      <h4 class="card-title">Overview
+  </h4>
+  </div>
+
+</div>
+</div>
+<div class="container">
+    
+ <div class="col-sm-12 nopadd">
+   <div class="col-sm-6 dashbox marright">
+     <div class="col-sm-12">
+<h1>Manage Admin</h1>
+<div class="dashdetailbox">
+<div>Total Admin<span>0</span></div>
+<div>Last Admin Added<span>Nil</span></div>
+</div>
+<div><a  class="btn btn-block btn-success" disabled>Manage</a></div>
+</div>
+</div>
+     
+     <div class="col-sm-6 dashbox marleft">
+        <div class="col-sm-12">
+<h1>Manage Company</h1>
+<div class="dashdetailbox">
+<div>Total Company <span>{{total_company}}</span></div>
+<div>Last Added Company <span>{{updated_company}}</span></div>
+</div>
+<div><a routerLink="/dashboard" class="btn btn-block btn-success">Manage</a></div>
+</div>
+   </div>
+ </div>
+  <!-- Large modal -->
+
+
+
+</div>
+</main>
+</ng-template>
