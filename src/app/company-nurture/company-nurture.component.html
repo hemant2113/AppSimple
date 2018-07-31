@@ -71,14 +71,16 @@
               <div class="form-group">
                 <span class="addfields btn btn-info" style="float:right;" (click)="addNewColumn()">Add Row</span>
               </div>
+              <div class="clearfix"></div>
               <div class="col-sm-12 nopadd">
-                <div class="col-sm-5 nopadd"><label>Assign URL Name</label></div>
-                <div class="col-sm-7"><label>Add Url Links With Https/Http</label></div>
+                <div class="col-sm-5 pull-left nopadd"><label>Assign URL Name</label></div>
+                <div class="col-sm-7 pull-left"><label>Add Url Links With Https/Http</label></div>
               </div>
+              <div class="clearfix"></div>
           <div class="col-sm-12 nopadd fristfieldremovebtnnone">
               <fieldset  *ngFor="let column of columns; let i = index">
-                <div class="col-sm-5 nopadd">
-                  <label for="urlName">URL Name</label>
+                <div class="col-sm-5 pull-left nopadd">
+                  <!-- <label for="urlName">URL Name</label> -->
                   <input type="text" class="form-control" id="urlName" required  [(ngModel)]="column.name" name="urlName" #urlName="ngModel">
                   <div *ngIf="urlName.errors && (urlName.dirty || urlName.touched)" class="alert-danger">
                     <div [hidden]="!urlName.errors.required">
@@ -89,9 +91,9 @@
                 </div>
             
             
-                  <div class="col-sm-7">
-                  <label for="url">URL</label>
-                  <input type="text" class="form-control" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
+                  <div class="col-sm-7 pull-left">
+                  <!-- <label for="url">URL</label> -->
+                  <input type="text" class="form-control width97per" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
                   <div *ngIf="url.errors && (url.dirty || url.touched)" class="alert-danger">
                     <div [hidden]="!url.errors.required">
                       URL is required!

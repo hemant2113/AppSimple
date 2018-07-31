@@ -39,19 +39,20 @@
               <span class="addfields btn btn-info" style="float:right;" (click)="addNewColumn()">Add Column</span>
             </div>
             <div class="form-group">
-              <div class="col-sm-5 nopadd">
+              <div class="col-sm-5 nopadd pull-left">
                 <label>Assign Url Name</label>
               </div>
-              <div class="col-sm-7">
+              <div class="col-sm-7  pull-left">
                 <label>Add Url Links With Https/Http</label>
               </div>
             </div>
+            <div class="clearfix"></div>
             <div class="form-group" *ngFor="let nurture_url of nurtue_url_obj; let i = index; ">
-              <div class="col-sm-5 nopadd" >
+              <div class="col-sm-5  pull-left nopadd" >
                 <input type="text" class="form-control"  [(ngModel)]="nurture_url.name" name="{{i}}" value="{{nurture_url.name}}">
               </div>
-              <div class="col-sm-7">
-                <input type="url" class="form-control" [(ngModel)]="nurture_url.url" name="{{i+'u'}}" value="{{nurture_url.url}}">
+              <div class="col-sm-7  pull-left">
+                <input type="url" class="form-control width97per" [(ngModel)]="nurture_url.url" name="{{i+'u'}}" value="{{nurture_url.url}}">
                 <button type="button" class="remove btn btn-danger"  (click)="removeRow(nurture_url)">x</button>
               </div>
               <!-- <div class="col-sm-12">
@@ -81,9 +82,10 @@
          
           <!-- Large modal -->
         </form>
+        <div class="clearfix"></div>
         <div class="col-sm-12 editfristfieldremovebtnnone">
             <fieldset  *ngFor="let column of columns; let i = index">
-              <div class="col-sm-5 nopadd">
+              <div class="col-sm-5 pull-left nopadd">
                 <label for="urlName"></label>
                 <input type="text" class="form-control" id="urlName" required  [(ngModel)]="column.name" name="urlName" #urlName="ngModel">
                 <div *ngIf="urlName.errors && (urlName.dirty || urlName.touched)" class="alert-danger">
@@ -95,9 +97,9 @@
               </div>
           
           
-                <div class="col-sm-7">
+                <div class="col-sm-7 pull-left">
                 <label for="url"></label>
-                <input type="text" class="form-control" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
+                <input type="text" class="form-control width97per" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
                 <div *ngIf="url.errors && (url.dirty || url.touched)" class="alert-danger">
                   <div [hidden]="!url.errors.required">
                     URL is required!

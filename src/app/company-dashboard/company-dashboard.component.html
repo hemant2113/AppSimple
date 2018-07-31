@@ -43,15 +43,15 @@
                         <div class="form-group">
                                 <label for="companyLogo">Company Logo :</label>
                                 <div class="clearfix"></div>
-                        <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                        <div class="col-sm-9 pull-left nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
                             </div>
-                            <div  class="col-sm-3"> 
-                                    <div class="col-sm-6">
-                                    <img *ngIf="selectLogo" [src]="imageUrl"  class="img-responsive"></div>
+                            <div  class="col-sm-3 pull-left"> 
+                                    <div class="col-sm-6 pull-left">
+                                    <img *ngIf="selectLogo" [src]="imageUrl"  class="img-responsive logoimg100px"></div>
                                     <!-- <a *ngIf="selectLogo" (click)="LogoRemove()">Remove</a> -->
                                 <!-- 2nd image -->
-                                <div class="col-sm-6">
-                                <img *ngIf="logo && selectLogo ==false" src="{{logo}}"  class="img-responsive">
+                                <div class="col-sm-6 pull-left">
+                                <img *ngIf="logo && selectLogo ==false" src="{{logo}}"  class="img-responsive logoimg100px">
                                 </div>
                                 </div>
                         </div>
@@ -60,15 +60,15 @@
                         <div class="form-group">
                                 <label for="companyLogo">Favicon Icon :</label>
                                 <div class="clearfix"></div>
-                        <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+                        <div class="col-sm-9 nopadd pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
                             </div>
-                            <div  class="col-sm-3"> 
-                                <div class="col-sm-6">
-                                <img *ngIf="selectFavicon" [src]="favUrl"  class="img-responsive"></div>
+                            <div  class="col-sm-3 pull-left"> 
+                                <div class="col-sm-6 pull-left">
+                                <img *ngIf="selectFavicon" [src]="favUrl"  class="img-responsive logoimg100px"></div>
                                 <!-- <a (click)="FaviconRemove()">Remove</a> -->
                             <!-- 2nd image -->
-                            <div class="col-sm-6">
-                            <img *ngIf="favicon  && selectFavicon ==false" src="{{favicon}}"  class="img-responsive">
+                            <div class="col-sm-6 pull-left">
+                            <img *ngIf="favicon  && selectFavicon ==false" src="{{favicon}}"  class="img-responsive logoimg100px">
                             </div>
                             </div>
                         </div>

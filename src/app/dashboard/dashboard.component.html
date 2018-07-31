@@ -30,7 +30,7 @@
               <table class="table table-hover table-bordered">
                  <thead>
                     <tr>
-                       <th scope="col" width="5%">S. No.</th>
+                       <th scope="col" width="5%">#</th>
                        <th scope="col" width="15%">Company Logo</th>
                        <th scope="col" width="20%">Company Name</th>
                        <th scope="col" width="35%">Url's</th>
@@ -110,9 +110,9 @@
            <div class="form-group">
               <label for="companyLogo">Company Logo :</label>
               <div class="clearfix"></div>
-              <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+              <div class="col-sm-9 nopadd pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
               </div>
-              <div class="col-sm-3"> 
+              <div class="col-sm-3 pull-left"> 
                   <div class="defaultimg">
                   <img *ngIf="imageUrl != ''" [src]="imageUrl">
                 </div>
@@ -123,10 +123,10 @@
            <div class="form-group">
                 <label for="companyLogo">Favicon Icon :</label>
                 <div class="clearfix"></div>
-           <div class="col-sm-9 nopadd"> 
+           <div class="col-sm-9 nopadd  pull-left"> 
                 <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
             </div>
-            <div class="col-sm-3"> 
+            <div class="col-sm-3  pull-left"> 
                     <div class="defaultico">
                 <img *ngIf="favUrl != ''" [src]="favUrl" >
             </div>
@@ -137,8 +137,8 @@
         </div>
         <div class="clearfix"></div>
         <!-- fav icon -->
-           <div class="form-group">
-              <button class="btn btn-primary">Submit</button>
+           <div class="form-group"><br/>
+              <button class="btn btn-success btn-block">Submit</button>
            </div>
            </form>
         </div>
@@ -173,16 +173,17 @@
               <div class="form-group">
                  <label for="companyLogo">Company Logo :</label>
                  <div class="clearfix"></div>
-                 <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                 <div class="col-sm-9 nopadd  pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
                  </div>
-                
+                 <div class="col-sm-3 pull-left"> 
+                    <div class="defaultimg">
                  <!-- <div *ngIf="logo != null && imageUrl == '../assets/img/default-logo.png'"><img src="{{logo}}" style="max-width:100px;max-height:100px"/></div> -->
                  <div *ngIf="logo != null && lValue == false;then content ">here is ignored</div>    
-                 <ng-template #content><img src="{{logo}}" style="max-width:100px;max-height:100px"/></ng-template>
+                 <ng-template #content><img src="{{logo}}" /></ng-template>
                 
-                 <div *ngIf="lValue"><img [src]="imageUrl"  style="max-width:100px;max-height:100px"/></div>    
+                 <div *ngIf="lValue"><img [src]="imageUrl"  /></div>    
                 
-
+</div></div>
                 
                  
                 
@@ -192,20 +193,22 @@
               <div class="form-group">
                     <label for="companyLogo">Favicon Icon :</label>
                     <div class="clearfix"></div>
-            <div class="col-sm-9 nopadd">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+            <div class="col-sm-9 nopadd  pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
                 </div>
-                <div *ngIf="favicon != null ;then contentt else other_contentt">here is ignored</div>    
-                 <ng-template #contentt><img src="{{favicon}}" style="max-width:100px;max-height:100px"/></ng-template>
-                 <ng-template #other_contentt><img [src]="favUrl"  style="max-width:100px;max-height:100px">  </ng-template>
+                <div class="col-sm-3 pull-left"> 
+                    <div class="defaultimg">
+                <ng-template #contentt><img src="{{favicon}}" /></ng-template>
+                 <ng-template #other_contentt><img [src]="favUrl" style="display: none;" >  </ng-template>
                 
-                 <div *ngIf="fValue"><img [src]="favUrl"  style="max-width:100px;max-height:100px"/></div>    
-                
-                
+                 <div *ngIf="fValue"><img [src]="favUrl" /></div>    
+                </div></div>
+                 <div *ngIf="favicon != null ;then contentt else other_contentt">here is ignored</div>    
+               
             </div>
             <div class="clearfix"></div>
             
               
-              <div class="form-group">
+              <div class="form-group"><br/>
                  <input type="submit" value="Submit" class="btn btn-block btn-success">
               </div>
            </form>

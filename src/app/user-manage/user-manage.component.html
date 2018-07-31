@@ -24,10 +24,10 @@
          <div class="col-sm-12" >
             <h1>User List</h1>
             <div class="card">
-               <table class="table table-hover">
+               <table class="table table-hover table-bordered">
                   <thead>
                      <tr>
-                        <th scope="col" width="80px">S. No.</th>
+                        <th scope="col" width="80px">#</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Manage</th>
@@ -64,7 +64,7 @@
       </div>
       <div class="container">
          <div class="row">
-            <div class="col-md-6 offset-md-2">
+            <div class="col-sm-12">
                <h3></h3>
                <form name="form" (ngSubmit)="f.form.valid && onSubmitUser($event)" #f="ngForm" #imageForm=ngForm novalidate>
                <div class="form-group">
@@ -120,7 +120,7 @@
       </div>
       <div class="container">
          <div class="row">
-            <div class="col-md-6 offset-md-2">
+            <div class="col-sm-12">
                <h3></h3>
                <form name="form" (ngSubmit)="f.form.valid && onSubmitUserEdit($event)" #f="ngForm" #imageForm=ngForm novalidate>
                <input type="hidden" class="form-control" name="id" [(ngModel)]="model.id" #id="ngModel" />

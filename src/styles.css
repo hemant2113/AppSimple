@@ -1,8 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
-
-
 .simple-notification-wrapper.bottom{
     z-index: 999999;
 }
@@ -20,12 +17,29 @@ body{
     color: #ffffff;
     z-index: 9999;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
     text-align: center;
     opacity: 1;
+    overflow: hidden;
+    padding: 0px 5px;
+    margin-top: 2px;
+    margin-right: 0px;
+    width: 30px;
+    float: right;
+    height: 30px;
 }
-
+.martop10px{
+    margin-top: 10px;
+}
+.padtopbot10px{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.width97per{
+    max-width: 97%!important;
+}
+.btn-danger{
+color:#fff!important;
+}
 fieldset .form-control input::placeholder{
     color:#000000!important;
 } 
@@ -34,6 +48,18 @@ fieldset .form-control input::placeholder{
     font-size: 20px;
     padding: 10px 0px;
     background: #ccc;
+}
+.rightposition{
+    position: absolute!important;
+    right: 10px!important;
+}
+.pull-left{
+    float:left;
+}
+header .navbar{
+    padding-top:0px;
+    padding-bottom:0px;
+    position: relative;
 }
 main{padding-bottom: 30px;}
 .modal-header{

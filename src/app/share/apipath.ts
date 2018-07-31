@@ -1,3 +1,3 @@
 export const apiPath = {
-   apiUrl: 'https://app.instaspiel.com:8888/'
+   apiUrl: 'https://masterapp.instaspiel.com:8888/'
    };
