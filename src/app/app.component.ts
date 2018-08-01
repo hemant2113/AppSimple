@@ -28,7 +28,7 @@ constructor(public dataservice: DataService,public _route: Router,  private loc:
 }
   ngOnInit(){
     // Right Click Off
-    // document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('contextmenu', event => event.preventDefault());
     // Right Click Off
     // this.titleService.setTitle('instaspiel---');
 
@@ -58,9 +58,13 @@ constructor(public dataservice: DataService,public _route: Router,  private loc:
         this.newdata = res.json().data.result
         this.favicon = res.json().data.result.favicon;
         console.log(res.json().data.result.favicon)
-        // alert(this.favicon)
-      }else{
-        // this._route.navigate(['login'])
+        var full_url = window.location.href.search('spiel')
+             if(full_url == -1){
+                 this.newdata = res.json().data.result
+               }
+               
+              
+        
       }
 
     });
