@@ -177,7 +177,7 @@
                  </div>
                  <div class="col-sm-3 pull-left"> 
                     <div class="defaultimg">
-                 <div *ngIf="logo != null && imageUrl == '../assets/img/default-logo.png'"><img src="{{logo}}" style="max-width:100px;max-height:100px"/></div>
+                 <div *ngIf="logo == null && imageUrl == '../assets/img/default-logo.png'"><img src="" style="max-width:100px;max-height:100px"/></div>
                  <div *ngIf="logo != null && lValue == false;then content ">here is ignored</div>    
                  <ng-template #content><img src="{{logo}}" /></ng-template>
                 
@@ -197,7 +197,7 @@
                     </div>
                     <div class="col-sm-3 pull-left"> 
                        <div class="defaultimg">
-                    <div *ngIf="favicon != null && favUrl == '../assets/img/default-fav.png'"><img src="{{favicon}}" style="max-width:100px;max-height:100px"/></div>
+                    <div *ngIf="favicon == null && favUrl == '../assets/img/default-fav.png'"><img src="{{favicon}}" style="max-width:100px;max-height:100px"/></div>
                     <div *ngIf="favicon != null && fValue == false;then contentt ">here is ignored</div>    
                     <ng-template #contentt><img src="{{favicon}}" /></ng-template>
                    

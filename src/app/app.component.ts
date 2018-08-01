@@ -55,16 +55,15 @@ constructor(public dataservice: DataService,public _route: Router,  private loc:
     this._http.post(this.api+'company/detail', {domain_name: domain_name},'{headers: headers}').subscribe(res =>{
       this.data = res;
       if(res.json().data.responseCode == 200){
-        this.newdata = res.json().data.result
-        this.favicon = res.json().data.result.favicon;
-        console.log(res.json().data.result.favicon)
         var full_url = window.location.href.search('spiel')
-             if(full_url == -1){
-                 this.newdata = res.json().data.result
-               }
-               
-              
+        if(full_url == -1){
+          this.newdata = res.json().data.result;
+          this.favicon = res.json().data.favicon
+
+        }
         
+      }else{
+        // this._route.navigate(['login'])
       }
 
     });

@@ -65,9 +65,7 @@ export class DashboardComponent implements OnInit {
         this.loader = false;
         });
     }
-    hello(){
-        
-    }
+    
 
    
     public openModal(template: TemplateRef<any>) {
@@ -184,7 +182,7 @@ if(this.fileToUpload)
         this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
         this.logo = res.json().data.result
         // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
-        this.insert(companyName,companyUrl,hubspotId,this.logo,'')
+        this.insert(companyName,companyUrl,hubspotId,this.logo,null)
         });
          
         }
@@ -208,7 +206,7 @@ else
             this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
             this.favicon = res.json().data.result
             // console.log(companyName,companyUrl,hubspotId,'',this.favicon)
-            this.insert(companyName,companyUrl,hubspotId,'',this.favicon)
+            this.insert(companyName,companyUrl,hubspotId,null,this.favicon)
         });
        
          
@@ -222,49 +220,7 @@ else
 
 }
       
-    //   var companyName = this.model.companyName;
-    //   var companyUrl = this.model.companyUrl;
-    //   var hubspotId = this.model.hubspotid;
-    //    console.log(this.fileToUpload );      
-       
-    //    console.log(companyName,companyUrl)
-    //    var headers = new Headers();
-    //    headers.append('Content-Type', 'application/json');
-    //    headers.append('Accept', 'application/json');
-       
-    //    if(this.fileToUpload){
-    //     let dataLogo = new FormData();
-    //     // dataLogo.append('header_script', header_script);
-    //     dataLogo.append('field', 'image');
-    //     dataLogo.append('destination', 'company/logo');
-    //     dataLogo.append('image', this.fileToUpload);
-    //     this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-    //     this.logo = res.json().data.result
-    //     console.log(this.logo)
-    //     this.favicon = '';
-        
-
-
-    // });
-    // }else{
-    //     // this.logo = null;
-    //    }
-
-    //    console.log(this.image)
-    // //    if(this.fileToUploadfav){
-    // //     let dataFav = new FormData();
-    // //     // dataFav.append('header_script', header_script);
-    // //     dataFav.append('field', 'image');
-    // //     dataFav.append('destination', 'company/fav');
-    // //     dataFav.append('image', this.fileToUploadfav);
-    // //     this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-    // //     this.favicon = res.json().data.result
-    // //     console.log(this.favicon)
-    // // });
-    // // }else{
-    // //     // this.logo = null;
-    // //    }
-
+    
     }
 
     addCompanyTwo(e) {
@@ -274,7 +230,7 @@ else
         var company_url = e.target.elements[2].value;
         var tracking_id = e.target.elements[3].value;
         
-       
+       console.log(this.image)
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
@@ -289,7 +245,7 @@ if(this.fileToUpload)
         
         
          
-        if(this.fileToUploadfav)
+        if(this.fileToUploadfav )
         {
             let dataFav = new FormData();
             dataFav.append('field', 'image');
@@ -316,7 +272,7 @@ if(this.fileToUpload)
         this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
         this.logo = res.json().data.result
         // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
-        this.update(id,company_name,company_url,tracking_id,this.logo,'')
+        this.update(id,company_name,company_url,tracking_id,this.logo,this.image[1])
 
         });
          
@@ -341,7 +297,7 @@ else
             this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
             this.favicon = res.json().data.result
             // console.log(companyName,companyUrl,hubspotId,'',this.favicon)
-            this.update(id,company_name,company_url,tracking_id,'',this.favicon)
+            this.update(id,company_name,company_url,tracking_id,this.image[0],this.favicon)
 
         });
        
@@ -351,7 +307,7 @@ else
         {
           
           
-           this.update(id,company_name,company_url,tracking_id,'','')
+           this.update(id,company_name,company_url,tracking_id,this.image[0],this.image[1])
 
         }
      
@@ -372,6 +328,13 @@ else
 
             this.tracking_id = res.json().data.result.body_script;
             console.log(this.logo,this.favicon)
+
+
+
+            this.image.push(this.logo)
+            this.image.push(this.favicon)
+            console.log(this.image)
+
         });
         
     }
@@ -421,8 +384,8 @@ insert(com_name,com_url,hub_id,logo_s3,fav_s3){
         this.posts.push(res.json().data.result);
         console.log(this.posts)
         this.ngOnInit();
-
-      this.common.successNotify('Success', 'Company Added successfully');
+        this.common.successNotify('Success', 'Company Added successfully');
+        this.modalRef.hide();      
     } else {
       this.common.errorNotify('Error', 'Something went wrong please try after sometime');
 
@@ -438,7 +401,7 @@ insert(com_name,com_url,hub_id,logo_s3,fav_s3){
 
 update(id,com_name,com_url,hub_id,logo_s3,fav_s3){
 
-    let data = new FormData();
+    const data = new FormData();
     // data.append('header_script', header_script);
     data.append('url', com_url);
     data.append('name', com_name);
@@ -446,8 +409,9 @@ update(id,com_name,com_url,hub_id,logo_s3,fav_s3){
     data.append('logo', logo_s3);
     data.append('favicon', fav_s3);
 
-    console.log(data);
-    this.http.put(this.api+'company/'+id, data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+    // console.log(id,com_name,com_url,hub_id,logo_s3,fav_s3);
+    // console.log({name:com_name,url:com_url,header_script:hub_id,logo:logo_s3,favicon:fav_s3})
+    this.http.put(this.api+'company/'+id, {name:com_name,url:com_url,header_script:hub_id,logo:logo_s3,favicon:fav_s3},'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
     if (res.json().data.responseCode == 200) {
         // console.log(this.posts)
         // console.log(res.json())

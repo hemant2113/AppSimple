@@ -8,7 +8,7 @@
         <div class="container nopadd">
            <div class="card-body">
             <h4 class="card-title">
-                <div *ngIf="company_logo == null;then content else other_content">here is ignored</div>    
+                <div *ngIf="company_logo == '';then content else other_content">here is ignored</div>    
                 <ng-template #content>{{company_name}}</ng-template>
                 <ng-template #other_content><img src="{{company_logo}}" class="companylogo"/>   </ng-template>
                 / Manage Nurture

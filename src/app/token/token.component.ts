@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { apiPath } from './../share/apipath';
 import {
     CommonService
@@ -75,8 +76,8 @@ export class TokenComponent implements OnInit {
 
     ngOnInit() {
         if (window.location.href.search('%2F')){
-           history.pushState('stateObj', "page 2", window.location.href.split('%2F').join('/'));   
-        }
+           history.pushState('stateObj', "page 2", window.location.href.split('%2F').join('/'));
+      }
        const nurture_id = this._routerActivated.snapshot.paramMap.get('nurture_name').split('-')[0];
 
         this._http.get(this.api + 'nurtureurl/list/' + nurture_id).subscribe(res => {
@@ -94,10 +95,20 @@ export class TokenComponent implements OnInit {
 
                     
                        setTimeout(() => {
-                        document.getElementsByTagName("iframe")[1].setAttribute("src", element.url);
+                        if(element.url.search('.pdf') != -1)
+                        {
+                            // alert('jhgjh')
+                        document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+element.url+'&embedded=true&output=embed');
+                        }
+                        else{
+                        document.getElementsByTagName("iframe")[0].setAttribute("src", element.url);
+                        }
     
                        }, 1000);
-                      
+                      setTimeout(() => {
+                        this.logutser.loadBodyScript(this.headerScript, 'head')
+//   console.log(this.headerScript)
+                      }, 1100);
                        this.titleService.setTitle(localStorage.getItem("tokenTitle"));
 
                         this.select(index)
@@ -127,10 +138,10 @@ export class TokenComponent implements OnInit {
            
            
             if (this.headerScript) {
-                this.logutser.loadScript(this.headerScript, 'head')
+                this.logutser.loadBodyScript(this.headerScript, 'head')
             }
             if (this.bodyScript) {
-                this.logutser.loadBodyScript(this.bodyScript, 'body');
+                // this.logutser.loadBodyScript(this.bodyScript, 'body');
             }
 
 
