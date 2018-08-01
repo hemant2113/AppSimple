@@ -13,7 +13,10 @@ a:hover {
 .dropdown{padding-top: 7px;}
 
 
-
+.navbar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 
 .dropbtn {

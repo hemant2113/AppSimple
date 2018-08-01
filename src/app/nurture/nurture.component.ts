@@ -205,6 +205,8 @@ import {
       console.log(data.json().data.result)
       this.nurtures.push(data.json().data.result);
       console.log(this.nurtures)
+      this.ngOnInit();
+
       this.common.successNotify('Success', data.json().data.result + " Single Nurture Url")
      } else {
       this.common.errorNotify('Error', data.json().data.result)

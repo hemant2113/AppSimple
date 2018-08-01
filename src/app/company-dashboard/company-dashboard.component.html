@@ -9,7 +9,7 @@
           <div class="card-body">
                 
              <h4 class="card-title">
-                    <div *ngIf="logo == null;then content else other_content">here is ignored</div>    
+                    <div *ngIf="logo == '';then content else other_content">here is ignored</div>    
                     <ng-template #content>{{company_name}}</ng-template>
                     <ng-template #other_content><img src="{{logo}}" class="companylogo"/>   </ng-template>
                    

@@ -47,6 +47,7 @@ export class CompanyDashboardComponent implements OnInit {
       console.log(res);
 
             this.company_name = res.json().data.result.name;
+            debugger
             this.company_url = res.json().data.result.url;
             this.logo = res.json().data.result.logo;
             this.favicon = res.json().data.result.favicon;

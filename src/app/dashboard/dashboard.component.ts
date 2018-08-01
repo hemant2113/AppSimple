@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
     fileToUploadfav:File = null;
     favUrl: string = ""
     tracking_id='';
+    hubspotid:string;
     // imageUrlT: string = "../assets/img/default-ico.png";
     fileToUpload: File = null;
     model: any = {};
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
     favicon:string='';
     lValue:boolean = false;
     fValue:boolean = false;
+    image = [];
     constructor(public common: CommonService  ,private notif: NotificationsService,public logout: CommonService ,private modalService: BsModalService,private imageService : UploadImageService,public dataservice: DataService, private http: Http, private router: Router) {
         // alert(this.headerData)
         this.dataservice.getData().subscribe(posts => {
@@ -136,133 +138,132 @@ export class DashboardComponent implements OnInit {
 
     }
     addCompany() {
-      
+
+           
       var companyName = this.model.companyName;
       var companyUrl = this.model.companyUrl;
       var hubspotId = this.model.hubspotid;
-       console.log(this.fileToUpload );      
-       var fav = null;  
-       var logo = null;  
-       console.log(companyName,companyUrl)
-       var headers = new Headers();
-       headers.append('Content-Type', 'application/json');
-       headers.append('Accept', 'application/json');
-       
-      
-       if(this.fileToUploadfav){
-        let dataFav = new FormData();
-        // dataFav.append('header_script', header_script);
-        dataFav.append('field', 'image');
-        dataFav.append('destination', 'company/fav');
-        dataFav.append('image', this.fileToUploadfav);
-        this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-          if (res.json().data.responseCode == 200) {
-            console.log(res.json().data.result)                         
-            this.favicon = res.json().data.result     
-            let Comdata = new FormData();
-            Comdata.append('url', companyUrl);
-            Comdata.append('name', companyName);
-            Comdata.append('header_script', hubspotId);
+      console.log(hubspotId)   
+         var headers = new Headers();
+         headers.append('Content-Type', 'application/json');
+         headers.append('Accept', 'application/json');
 
-            
-            // Comdata.append('header_script', header_script);
-            // Comdata.append('body_script', body_script);
-            Comdata.append('favicon', res.json().data.result);
-    
-            this.http.post(this.api+'company', Comdata,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-            if (res.json().data.responseCode == 200) {
-                console.log(this.posts)
-                console.log(res.json().data.result)
-                this.posts.push(res.json().data.result);
-                console.log(this.posts)
-              this.common.successNotify('Success', 'Company Added successfully');
-                this.modalRef.hide;
-             } else {
-              this.common.errorNotify('Error', 'Something went wrong please try after sometime');
-    
-              // window.location.reload(); 
-             }
-          });            
-    
-            
-    
-          } else {
-            this.favicon = this.faviconldpath
-            console.log(res.json().data.error)  
-          }
-    
-        });  
-      }else{
-        this.favicon = this.faviconldpath 
-      }
-    
-      if(this.fileToUpload){
+if(this.fileToUpload)
+{
         let dataLogo = new FormData();
-        // dataLogo.append('header_script', header_script);
         dataLogo.append('field', 'image');
         dataLogo.append('destination', 'company/logo');
         dataLogo.append('image', this.fileToUpload);
-        // dataLogo.append('body_script', body_script);
-      
-        this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-          if (res.json().data.responseCode == 200) {
-            console.log(res.json().data.result)                         
-            this.logo = res.json().data.result     
-            let Comdata = new FormData();
-            Comdata.append('url', companyUrl);
-            Comdata.append('name', companyName);
-            Comdata.append('header_script', hubspotId);
-            // Comdata.append('body_script', body_script);
-            Comdata.append('logo', res.json().data.result);
-    
-            this.http.post(this.api+'company', Comdata,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-            if (res.json().data.responseCode == 200) {
-                console.log(this.posts)
-                console.log(res.json().data.result)
-                this.posts.push(res.json().data.result);
-                console.log(this.posts)
-              this.common.successNotify('Success', 'Company Added successfully');
-                
-              this.modalRef.hide;
-              // window.location.reload();
-             } else {
-              this.common.errorNotify('Error', 'Something went wrong please try after sometime');
-    
-              // window.location.reload(); 
-             }
-          });            
         
-          } else {
-            this.logo = this.logoldpath 
-            console.log(res.json().data.error)  
-          }
+        
+         
+        if(this.fileToUploadfav)
+        {
+            let dataFav = new FormData();
+            dataFav.append('field', 'image');
+            dataFav.append('destination', 'company/favicon');
+            dataFav.append('image', this.fileToUploadfav);
+        
+            
+        
+        this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.logo = res.json().data.result
+         
+        this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.favicon = res.json().data.result
+        // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
+        this.insert(companyName,companyUrl,hubspotId,this.logo,this.favicon)
         });
-      }else{
-        this.logo = this.logoldpath
-      }
-      if (this.fileToUpload == null && this.fileToUploadfav == null) {
-        let data = new FormData();
-        // data.append('header_script', header_script);
-        data.append('url', companyUrl);
-        data.append('name', companyName);
-        data.append('header_script', hubspotId);
-       
-        console.log(data);
-        this.http.post(this.api+'company', data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-        if (res.json().data.responseCode == 200) {
-            console.log(this.posts)
-            console.log(res.json().data.result)
-            this.posts.push(res.json().data.result);
-            console.log(this.posts)
-          this.common.successNotify('Success', 'Company Added successfully');
-          this.modalRef.hide;
-         } else {
-          this.common.errorNotify('Error', 'Something went wrong please try after sometime');
+        });
+        
+        
+           
+        }
+        else
+        {
+        this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.logo = res.json().data.result
+        // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
+        this.insert(companyName,companyUrl,hubspotId,this.logo,'')
+        });
+         
+        }
+}
+else
+{ 
+            
+        
 
-          // window.location.reload(); 
-         }
-        });  
-    }    
+        if(this.fileToUploadfav)
+        {  
+            let dataFav = new FormData();
+            dataFav.append('field', 'image');
+            dataFav.append('destination', 'company/favicon');
+            dataFav.append('image', this.fileToUploadfav);
+        
+            
+        
+      
+         
+            this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+            this.favicon = res.json().data.result
+            // console.log(companyName,companyUrl,hubspotId,'',this.favicon)
+            this.insert(companyName,companyUrl,hubspotId,'',this.favicon)
+        });
+       
+         
+        }
+        else
+        {
+          
+          
+           this.insert(companyName,companyUrl,hubspotId,'','')  
+        }
+
+}
+      
+    //   var companyName = this.model.companyName;
+    //   var companyUrl = this.model.companyUrl;
+    //   var hubspotId = this.model.hubspotid;
+    //    console.log(this.fileToUpload );      
+       
+    //    console.log(companyName,companyUrl)
+    //    var headers = new Headers();
+    //    headers.append('Content-Type', 'application/json');
+    //    headers.append('Accept', 'application/json');
+       
+    //    if(this.fileToUpload){
+    //     let dataLogo = new FormData();
+    //     // dataLogo.append('header_script', header_script);
+    //     dataLogo.append('field', 'image');
+    //     dataLogo.append('destination', 'company/logo');
+    //     dataLogo.append('image', this.fileToUpload);
+    //     this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+    //     this.logo = res.json().data.result
+    //     console.log(this.logo)
+    //     this.favicon = '';
+        
+
+
+    // });
+    // }else{
+    //     // this.logo = null;
+    //    }
+
+    //    console.log(this.image)
+    // //    if(this.fileToUploadfav){
+    // //     let dataFav = new FormData();
+    // //     // dataFav.append('header_script', header_script);
+    // //     dataFav.append('field', 'image');
+    // //     dataFav.append('destination', 'company/fav');
+    // //     dataFav.append('image', this.fileToUploadfav);
+    // //     this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+    // //     this.favicon = res.json().data.result
+    // //     console.log(this.favicon)
+    // // });
+    // // }else{
+    // //     // this.logo = null;
+    // //    }
 
     }
 
@@ -277,77 +278,86 @@ export class DashboardComponent implements OnInit {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-     
 
-        if (this.fileToUpload == null) {
-            let data = new FormData();
-            data.append('name', company_name);
-            data.append('url', company_url);
-            data.append('body_script', tracking_id);
 
+if(this.fileToUpload)
+{
+        let dataLogo = new FormData();
+        dataLogo.append('field', 'image');
+        dataLogo.append('destination', 'company/logo');
+        dataLogo.append('image', this.fileToUpload);
+        
+        
+         
+        if(this.fileToUploadfav)
+        {
+            let dataFav = new FormData();
+            dataFav.append('field', 'image');
+            dataFav.append('destination', 'company/favicon');
+            dataFav.append('image', this.fileToUploadfav);
+        
             
-            console.log(data);
-            this.http.put(this.api+'company/'+id, data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-            if (res.json().data.responseCode == 200) {
-                console.log(this.posts)
-                console.log(res.json().data.result)
-                this.posts.push(res.json().data.result);
-                console.log(this.posts)
-              this.ngOnInit();
-              this.common.successNotify('Success',res.json().data.result)
-            this.modalRef.hide();
-             } else {
-               alert()
-               this.common.errorNotify('Error',res.json().data.result)
-             }
-            });  
-        } else {
+        
+        this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.logo = res.json().data.result
+         
+        this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.favicon = res.json().data.result
+        // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
+        this.update(id,company_name,company_url,tracking_id,this.logo,this.favicon)
+        });
+        });
+        
+        
+           
+        }
+        else
+        {
+        this.http.post(this.api+'media/upload', dataLogo,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+        this.logo = res.json().data.result
+        // console.log(companyName,companyUrl,hubspotId,this.logo,this.favicon)
+        this.update(id,company_name,company_url,tracking_id,this.logo,'')
 
-
-            let data = new FormData();
-            data.append('field', 'image');
-            data.append('destination', 'company/logo');
-            data.append('image', this.fileToUpload);
-            console.log(data);
-
-
-            this.http.post(this.api+'media/upload', data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-                if (res.json().data.responseCode == 200) {
-                                        
-                    this.logo = res.json().data.result     
-                    let Comdata = new FormData();
-                    Comdata.append('name', company_name);
-                    Comdata.append('url', company_url);
-                    Comdata.append('logo', this.logo);
-                    Comdata.append('body_script', tracking_id);
-                    tracking_id
-                    this.http.put(this.api+'company/'+id, Comdata,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
-                        if (res.json().data.responseCode == 200) {
-                            console.log(this.posts)
-                            console.log(res.json().data.result)
-                            this.posts.push(res.json().data.result);
-                            console.log(this.posts)
-                          this.ngOnInit();
-                          this.common.successNotify('Success',res.json().data.result)
-                              this.modalRef.hide();
-                        } else {
-                            this.common.errorNotify('Error',res.json().data.result)  
-                        }
-                    });
+        });
+         
+        }
+}
+else
+{ 
             
-                    
-                } else {
-                    this.common.errorNotify('Error',res.json().data.error)
-                    
-                }
-            });
+        
 
+        if(this.fileToUploadfav)
+        {  
+            let dataFav = new FormData();
+            dataFav.append('field', 'image');
+            dataFav.append('destination', 'company/favicon');
+            dataFav.append('image', this.fileToUploadfav);
+        
+            
+        
+      
+         
+            this.http.post(this.api+'media/upload', dataFav,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+            this.favicon = res.json().data.result
+            // console.log(companyName,companyUrl,hubspotId,'',this.favicon)
+            this.update(id,company_name,company_url,tracking_id,'',this.favicon)
 
-
+        });
+       
+         
+        }
+        else
+        {
+          
+          
+           this.update(id,company_name,company_url,tracking_id,'','')
 
         }
+     
 
-
+        
+    }
 
     }
     editcompany(id) {
@@ -358,7 +368,10 @@ export class DashboardComponent implements OnInit {
             this.logo = res.json().data.result.logo;
             this.favicon = res.json().data.result.favicon;
             this.id = res.json().data.result.id;
+            this.hubspotid = res.json().data.result.header_script;
+
             this.tracking_id = res.json().data.result.body_script;
+            console.log(this.logo,this.favicon)
         });
         
     }
@@ -386,6 +399,70 @@ hide(){
  this.imageUrl = '';  
  this.favUrl = '';   
  
+}
+
+
+
+insert(com_name,com_url,hub_id,logo_s3,fav_s3){
+
+    let data = new FormData();
+    // data.append('header_script', header_script);
+    data.append('url', com_url);
+    data.append('name', com_name);
+    data.append('header_script', hub_id);
+    data.append('logo', logo_s3);
+    data.append('favicon', fav_s3);
+
+    console.log(data);
+    this.http.post(this.api+'company', data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+    if (res.json().data.responseCode == 200) {
+        console.log(this.posts)
+        console.log(res.json().data.result)
+        this.posts.push(res.json().data.result);
+        console.log(this.posts)
+        this.ngOnInit();
+
+      this.common.successNotify('Success', 'Company Added successfully');
+    } else {
+      this.common.errorNotify('Error', 'Something went wrong please try after sometime');
+
+      // window.location.reload(); 
+     }
+    });  
+}
+
+
+
+
+
+
+update(id,com_name,com_url,hub_id,logo_s3,fav_s3){
+
+    let data = new FormData();
+    // data.append('header_script', header_script);
+    data.append('url', com_url);
+    data.append('name', com_name);
+    data.append('header_script', hub_id);
+    data.append('logo', logo_s3);
+    data.append('favicon', fav_s3);
+
+    console.log(data);
+    this.http.put(this.api+'company/'+id, data,'{headers: headers}').subscribe((res: Response)=>{console.log('res==>', res)
+    if (res.json().data.responseCode == 200) {
+        // console.log(this.posts)
+        // console.log(res.json())
+        // this.posts.push({name:com_name,url:com_url,header_script:hub_id,logo:logo_s3,favicon:fav_s3});
+        // console.log(this.posts)
+this.ngOnInit();
+      this.common.successNotify('Success', 'Company Update successfully');
+      this.modalRef.hide();
+
+     } else {
+      this.common.errorNotify('Error', 'Something went wrong please try after sometime');
+
+      // window.location.reload(); 
+     }
+    });  
 }
 
 }

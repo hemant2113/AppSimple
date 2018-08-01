@@ -56,6 +56,9 @@ constructor(public dataservice: DataService,public _route: Router,  private loc:
       this.data = res;
       if(res.json().data.responseCode == 200){
         this.newdata = res.json().data.result
+        this.favicon = res.json().data.result.favicon;
+        console.log(res.json().data.result.favicon)
+        // alert(this.favicon)
       }else{
         // this._route.navigate(['login'])
       }

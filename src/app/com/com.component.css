@@ -48,7 +48,7 @@ border-radius: 0px;text-align: center;position: fixed;bottom:0px; height: 50px;f
 }
 .numtext{
 	display: inline-block;
-    max-width: 148px;
+    max-width: 145px;
 }
 ul.leftnav {
 	padding: 0;
@@ -152,6 +152,10 @@ border:0px solid #e5e5e5;
 }
 .leftside {
 	display: none
+}
+.numtext{
+	display: inline-block;
+    max-width: 145px;
 }
 .rightside {
 	width: 100%;

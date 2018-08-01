@@ -177,34 +177,51 @@
                  </div>
                  <div class="col-sm-3 pull-left"> 
                     <div class="defaultimg">
-                 <!-- <div *ngIf="logo != null && imageUrl == '../assets/img/default-logo.png'"><img src="{{logo}}" style="max-width:100px;max-height:100px"/></div> -->
+                 <div *ngIf="logo != null && imageUrl == '../assets/img/default-logo.png'"><img src="{{logo}}" style="max-width:100px;max-height:100px"/></div>
                  <div *ngIf="logo != null && lValue == false;then content ">here is ignored</div>    
                  <ng-template #content><img src="{{logo}}" /></ng-template>
                 
                  <div *ngIf="lValue"><img [src]="imageUrl"  /></div>    
                 
-</div></div>
+                  </div>
+                </div>
                 
                  
                 
               </div>
               <div class="clearfix"></div>
-
               <div class="form-group">
                     <label for="companyLogo">Favicon Icon :</label>
                     <div class="clearfix"></div>
-            <div class="col-sm-9 nopadd  pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+                    <div class="col-sm-9 nopadd  pull-left">  <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
+                    </div>
+                    <div class="col-sm-3 pull-left"> 
+                       <div class="defaultimg">
+                    <div *ngIf="favicon != null && favUrl == '../assets/img/default-fav.png'"><img src="{{favicon}}" style="max-width:100px;max-height:100px"/></div>
+                    <div *ngIf="favicon != null && fValue == false;then contentt ">here is ignored</div>    
+                    <ng-template #contentt><img src="{{favicon}}" /></ng-template>
+                   
+                    <div *ngIf="fValue"><img [src]="favUrl"  /></div>    
+                   
+                     </div>
+                   </div>
+                   
+                    
+                   
+                 </div>
+              <!-- <div class="form-group">
+                    <label for="companyLogo">Favicon Icon :</label>
+                    <div class="clearfix"></div>
+            <div class="col-sm-9 nopadd  pull-left">  
+                <input type="file" class="form-control" style="padding-top:5px;" #Image accept="image/*" (change)="handleFileInputfav($event.target.files)">
                 </div>
-                <div class="col-sm-3 pull-left"> 
-                    <div class="defaultimg">
-                <ng-template #contentt><img src="{{favicon}}" /></ng-template>
-                 <ng-template #other_contentt><img [src]="favUrl" style="display: none;" >  </ng-template>
-                
-                 <div *ngIf="fValue"><img [src]="favUrl" /></div>    
-                </div></div>
+                <ng-template #contentt><img src="{{favicon}}" class="col-sm-3 pull-left imgin" /></ng-template>
+                        <ng-template #other_contentt><img [src]="favUrl" class="" style="display: none;" >  </ng-template>
+                        <div *ngIf="fValue"><img [src]="favUrl" class="col-sm-3 pull-left imgnewin"/></div>    
+                   
                  <div *ngIf="favicon != null ;then contentt else other_contentt">here is ignored</div>    
-               
-            </div>
+             
+            </div> -->
             <div class="clearfix"></div>
             
               

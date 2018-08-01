@@ -130,7 +130,15 @@ export class ComComponent implements OnInit {
           } 
           this.firstUrl = res.json().data.result.nurture_data[0].nurture_url[0].url;
           this.firstUrlName = res.json().data.result.nurture_data[0].nurture_url[0].name;
+         if(this.firstUrl.search('.pdf')!= -1)
+        {
+          document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
+
+        }else{
           document.getElementsByTagName("iframe")[0].setAttribute("src", this.firstUrl);
+
+        }
+
           this.nurture_url_obj = res.json().data.result.nurture_data[0].nurture_url[0];
           this.nurture_name = res.json().data.result.nurture_data[0].nurture_url[0].url
           

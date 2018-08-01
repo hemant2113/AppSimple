@@ -10,6 +10,7 @@
     border-radius: 50%;
     overflow: hidden;
 }
+.imgin{max-width: 70px;max-height:70px; margin-left: 15px}
 .defaultico{
     /* background-image: url(https://s3.us-east-2.amazonaws.com/instaspiel/default-ico.png); */
     width: 70px;

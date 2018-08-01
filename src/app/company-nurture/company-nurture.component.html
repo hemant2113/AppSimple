@@ -8,7 +8,7 @@
     <div class="container nopadd">
       <div class="card-body">
         <h4 class="card-title">
-            <div *ngIf="company_logo == null;then content else other_content">here is ignored</div>    
+            <div *ngIf="company_logo == '';then content else other_content">here is ignored</div>    
             <ng-template #content>{{company_name}}</ng-template>
             <ng-template #other_content><img src="{{company_logo}}" class="companylogo"/>   </ng-template>
             / Manage Nurture
@@ -18,7 +18,7 @@
   </div>
   <div class="addnurturesection">
     <div class="container">
-      <h1>Add Nurture</h1>
+      <h1 class="martop10px padtopbot10px">Add Nurture</h1>
       <div class="card">
         <div class="card-body">
             <div class="dashdetailbox">
@@ -47,18 +47,6 @@
               <input type="text" class="form-control" id="author"  [(ngModel)]="model.description" name="author" #author="ngModel">
              
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
           <!-- {{columns |json}} -->
           <div class="clearfix"></div>
@@ -121,8 +109,8 @@
   <!-- <div class="msg">{{columns |json}}</div> -->
   <!-- **************************************************************************************** -->
   <div class="container">
-    <div class="col-sm-12" >
-      <h1>Nurture List
+    <div class="col-sm-12 nopadd" >
+      <h1 class="martop10px padtopbot10px">Nurture List
         <a style="float:right;" type ="button" href="http://{{company_url}}" class="btn btn-sm btn-danger"  class="btn btn-sm btn-info"  [target]="'_blank'">Preview :- {{company_name}}</a>
       </h1>
       <div class="card">
@@ -138,7 +126,7 @@
           <tbody>
             <tr *ngFor="let nurture of  nurtures; let i =index;" >
               <td width="15%"> {{nurture.name}}</td>
-              <td width="40%"> {{nurture.description}}</td>
+              <td width="35%"> {{nurture.description}}</td>
               <td width="30%">
                 <ol  class="assignurlbox" *ngFor="let nurtureurl of  nurtures_urls">
                   <li  *ngIf="nurture.id == nurtureurl.nurture"><a href="{{nurtureurl.url}}" target="_blank">{{nurtureurl.name}}</a> 
@@ -146,7 +134,7 @@
                   </li>
                 </ol>
               </td>
-              <td width="20%">
+              <td width="25%">
                 <button class="btn btn-sm btn-secondary" (click)="nurtureEditPage(nurture.id)">Edit</button>
                 <!-- <button class="btn btn-sm btn-secondary" (click)="getNurtureDetails(nurture.id) || openModal(templateEdit)">Edit</button> -->
                 <!-- <button class="btn btn-sm btn-danger" (click)="deleteNurture(nurture.id)"  style="margin: 0px 5px;">Delete</button> -->

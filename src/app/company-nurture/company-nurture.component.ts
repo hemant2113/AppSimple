@@ -176,6 +176,7 @@ addNurture(e){
         res.json().data.responseCode
         // alert(res.json().data.responseCode)
         if(res.json().data.responseCode == 200 ){
+          this.ngOnInit;
           this.common.successNotify('Success' ,res.json().data.message )
 
         }else{
