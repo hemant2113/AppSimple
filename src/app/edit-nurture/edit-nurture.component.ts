@@ -31,6 +31,7 @@ company_name:string;
   nurtue_url_obj:any;
   sessionItem:any;
   company_logo= '';
+  index_row:number;
   constructor(public common: CommonService,private notif: NotificationsService,private router:Router,public http: Http,public _route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -64,6 +65,8 @@ company_name:string;
     var com_id = res.json().data.result.id;
   }); 
 });
+
+
 
 
 }
@@ -120,6 +123,7 @@ removeRow(nurture_url){
 
 
 addNewColumn(){
+  
   var newItemNo = this.columns.length+1;
 
 

@@ -43,7 +43,7 @@ import {
     BsModalService
 }
 from 'ngx-bootstrap/modal';
-
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-token',
@@ -95,19 +95,22 @@ export class TokenComponent implements OnInit {
 
                     
                        setTimeout(() => {
-                        if(element.url.search('.pdf') != -1)
-                        {
-                            // alert('jhgjh')
-                        document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+element.url+'&embedded=true&output=embed');
-                        }
-                        else{
-                        document.getElementsByTagName("iframe")[0].setAttribute("src", element.url);
-                        }
-    
+                            if(element.url.search('.pdf') != -1) {
+                                // debugger
+                                if (document.getElementsByTagName("iframe")[0].hasAttribute("src")) {
+                                    // document.getElementsByTagName("iframe")[0].removeAttribute("src");
+                                    document.getElementsByTagName("iframe")[1].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
+                                } else {
+                                    document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
+                                }
+                            } else {
+                                document.getElementsByTagName("iframe")[0].setAttribute("src", element.url);
+                            }
                        }, 1000);
+
                       setTimeout(() => {
                         this.logutser.loadBodyScript(this.headerScript, 'head')
-//   console.log(this.headerScript)
+                        // console.log(this.headerScript)
                       }, 1100);
                        this.titleService.setTitle(localStorage.getItem("tokenTitle"));
 
@@ -135,7 +138,8 @@ export class TokenComponent implements OnInit {
             this.headerScript = res.json().data.result.header_script;
             this.bodyScript = res.json().data.result.body_script;
             this.nurture_obj = res.json().data.result.nurture_data;
-           
+          
+
            
             if (this.headerScript) {
                 this.logutser.loadBodyScript(this.headerScript, 'head')
@@ -144,6 +148,7 @@ export class TokenComponent implements OnInit {
                 // this.logutser.loadBodyScript(this.bodyScript, 'body');
             }
 
+            this.logutser.setTabIcon( res.json().data.result.favicon, 'head')
 
         });
 

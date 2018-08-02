@@ -51,7 +51,7 @@ export class NurtureViewComponent implements OnInit {
                         this.nurture_url = data.json().data.result.nurture_url;
                         this.firstUrl = this.nurture_url[0].url;
 
-                        document.getElementsByTagName("iframe")[0].setAttribute("src", this.firstUrl); 
+                        // document.getElementsByTagName("iframe")[0].setAttribute("src", this.firstUrl); 
 
                         // alert(this.firstUrl);
                         // console.log(data.json().data.result.nurture_url.length)

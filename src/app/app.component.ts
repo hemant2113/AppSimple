@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Http, Jsonp } from '@angular/http';
 import { Title } from '@angular/platform-browser';
 // import {FlashMessage} from 'angular-flash-message';
+import * from "jquery";
 
 
 

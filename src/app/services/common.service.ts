@@ -122,5 +122,11 @@ export class CommonService {
     node.src = data;
     document.getElementsByTagName(tag)[0].appendChild(node);
   }
-
+  setTabIcon(data, tag) {
+    let node = document.createElement('link');
+    node.type = 'image/x-icon';
+   node.href = data;
+   node.rel = 'icon';
+    document.getElementsByTagName(tag)[0].appendChild(node);
+  }
 }

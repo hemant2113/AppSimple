@@ -77,9 +77,10 @@
     
 <!-- ******************************************************************************* -->
 <div class="clearfix"></div>
+
 <div class="col-sm-12 nopadd">
     <fieldset  *ngFor="let column of columns; let i = index">
-      <div class="col-sm-5 pull-left nopadd">
+      <div class="col-sm-5 pull-left nopadd" >
         <label for="urlName"></label>
         <input type="text" class="form-control" id="urlName" required  [(ngModel)]="column.name" name="urlName" #urlName="ngModel">
         <div *ngIf="urlName.errors && (urlName.dirty || urlName.touched)" class="alert-danger">
@@ -91,7 +92,7 @@
       </div>
   
   
-        <div class="col-sm-7 pull-left">
+        <div class="col-sm-7 pull-left" >
         <label for="url"></label>
         <input type="text" class="form-control" id="url" required pattern="https?://.+" [(ngModel)]="column.url" name="url" #url="ngModel">
         <button type="button" class="remove btn btn-danger"  (click)="removeColumn(i)">x</button>

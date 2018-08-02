@@ -30,7 +30,7 @@
       <li (click)="select(i)" 
       [ngClass]="{'active': selectedIndex == i, 'list-group-item': true}" 
       *ngFor="let nurture of nurture_obj; let i =index">
-      <a routerLink="spiel/{{nurture.id}}-{{new_nurture_name[i]}}-/{{arr_url_nurture_name[i]}}" [target]="'_blank'" class="active" (click)="docScript(i) || setTitle(nurture.id)"><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurture.name}}</span></a></li>
+      <a routerLink="spiel/{{nurture.id}}-{{new_nurture_name[i]}}-/{{arr_url_nurture_name[i]}}" [target]="'_blank'" class="active" (click)="docScript(i) || setTitle(nurture.id) || setTitle(i)"><span class="numicon">{{i+1}}</span>  <span class="numtext">{{nurture.name}}</span></a></li>
     </ul>
   </div>
 </ng-template>

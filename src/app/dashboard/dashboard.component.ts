@@ -324,9 +324,9 @@ else
             this.logo = res.json().data.result.logo;
             this.favicon = res.json().data.result.favicon;
             this.id = res.json().data.result.id;
-            this.hubspotid = res.json().data.result.header_script;
+            this.tracking_id = res.json().data.result.header_script;
 
-            this.tracking_id = res.json().data.result.body_script;
+            // this.tracking_id = res.json().data.result.body_script;
             console.log(this.logo,this.favicon)
 
 

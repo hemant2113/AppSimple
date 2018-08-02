@@ -134,6 +134,7 @@ export class ComComponent implements OnInit {
         {
           document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
 
+
         }else{
           document.getElementsByTagName("iframe")[0].setAttribute("src", this.firstUrl);
 
@@ -145,6 +146,10 @@ export class ComComponent implements OnInit {
           if (this.nurture_obj.length == 1 && !window.location.href.includes("/spiel/")) {
             const id = this.nurture_obj[0].id;
            
+           if (document.getElementsByTagName("iframe")[0].hasAttribute("src")) {
+                document.getElementsByTagName("iframe")[0].removeAttribute("src");
+                // debugger
+            }
               this._router.navigate(['spiel',+id+'-'+this.new_nurture_name[0]+'-/'+this.arr_url_nurture_name[0]])
                         
           }
