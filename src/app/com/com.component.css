@@ -3,6 +3,12 @@ a {
 	color: #222222;
 	text-decoration: none;
 }
+app-root app-root {
+	display: none;
+}
+app-root app-root .rightside {
+	background: #fff;
+}
 .nopadd {
 	padding: 0px;
 }

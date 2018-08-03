@@ -6,7 +6,6 @@ import { Location } from '@angular/common';
 import { Http, Jsonp } from '@angular/http';
 import { Title } from '@angular/platform-browser';
 // import {FlashMessage} from 'angular-flash-message';
-import * from "jquery";
 
 
 
@@ -47,7 +46,9 @@ constructor(public dataservice: DataService,public _route: Router,  private loc:
   // });
 
  
-
+ setTimeout(() => {
+    document.getElementsByTagName('app-root')[1].remove();
+  }, 1000);
 
 
     const domain_name = window.location.hostname;

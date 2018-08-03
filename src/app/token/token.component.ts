@@ -99,9 +99,9 @@ export class TokenComponent implements OnInit {
                                 // debugger
                                 if (document.getElementsByTagName("iframe")[0].hasAttribute("src")) {
                                     // document.getElementsByTagName("iframe")[0].removeAttribute("src");
-                                    document.getElementsByTagName("iframe")[1].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
+                                    document.getElementsByTagName("iframe")[1].setAttribute("src", 'https://docs.google.com/viewer?url='+element.url+'&embedded=true&output=embed');
                                 } else {
-                                    document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+this.firstUrl+'&embedded=true&output=embed');
+                                    document.getElementsByTagName("iframe")[0].setAttribute("src", 'https://docs.google.com/viewer?url='+element.url+'&embedded=true&output=embed');
                                 }
                             } else {
                                 document.getElementsByTagName("iframe")[0].setAttribute("src", element.url);
